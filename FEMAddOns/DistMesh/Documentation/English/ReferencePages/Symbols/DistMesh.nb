@@ -32,7 +32,7 @@ Cell["DistMesh`", "Categorization",
  CellLabel->"Context",
  CellID->468444828],
 
-Cell["DistMesh/ref/DistMesh", "Categorization",
+Cell["FEMAddOns/ref/DistMesh", "Categorization",
  CellLabel->"URI"]
 }, Closed]],
 
