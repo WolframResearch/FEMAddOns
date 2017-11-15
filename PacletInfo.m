@@ -7,6 +7,7 @@ Name -> "FEMAddOns",
 Version -> "1.0",
 MathematicaVersion -> "11+",
 Extensions -> {
+	{"Kernel", Context -> "FEMAddOns`"},
 	{"Kernel", Root -> "DistMesh/Kernel", Context -> {"DistMesh`"}},
 	{"Kernel", Root -> "DomainDecomposition/Kernel", Context -> {"DomainDecomposition`"}},
 
