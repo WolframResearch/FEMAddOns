@@ -7,29 +7,39 @@
 * Wolfram Workbench
 
 #### Building FEMAddOns 
-* Import FEMAddOns in Workbench. This needs to be done only once.
+First, import FEMAddOns in Workbench:
+* Select Import...
+* Git - Projects from Git (Next)
+* Existing local repository (Next)
+* Add... (browse to FEMAddOns, select, Next)
+* Import as general project (Finish)
 
-Build the documentation:
+The importing of the FEMAddOns needs to be done only once.
+
+
+Next, build the documentation:
 * In the FEMAddOns folder right click on docbuild.xml
   * Choose Run As...
   * Choose 2 Ant Build...
-  * Deselect all and select *clean*
+  * Deselect all 
+  * Select *clean*
   * Run
-* Repeat the above and choose *DistMesh* in stead of clean 
-* Repeat the above and choose *DomainDecomposition* in stead of clean 
+* Repeat the above and choose *DistMesh* instead of clean 
+* Repeat the above and choose *DomainDecomposition* instead of clean 
 
-This will create a folder build, which will contain a folder FEMAddOns that contains the build documentation.
+This will create a folder named build, which will contain a folder FEMAddOns that contains the build documentation of package.
 
-Copy the code:
+Copy the code into the package:
 * Run the script copyContent.sh once to copy the code into the package.
 
 This will copy the source code into the build/FEMAddOns package.
 
-Create a Paclet:
+Last, create the Paclet:
 * Possibly increment the VersionNumber in PacletInfo.m
 * Load the paclet manager: Needs["PacletManager`"] 
 * Set the directory into the build folder: SetDirectory[...] 
 * Check: FileNames[] should return {"FEMAddOns"}
 * Create the paclet: PackPaclet["FEMAddOns"]
 
-This will leave you with an path to a FEMAddOns-1.0.paclet in the build folder.
+This will leave you with a path to a FEMAddOns-1.0.paclet in the build folder.
+
