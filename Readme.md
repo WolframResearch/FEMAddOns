@@ -1,7 +1,7 @@
 
 # FEMAddOns for Wolfram Language
 
-FEMAddOns is a package that provides additional to the build in Finite Element Method functionality into the [Wolfram Language](https://www.wolfram.com/language/). FEMAddOns supports 11.3 and later versions of Wolfram Language deployments for the desktop, including [Wolfram Desktop](https://www.wolfram.com/desktop/) and [Mathematica](https://www.wolfram.com/mathematica/).
+FEMAddOns is a package that provides additional functionality to the [Wolfram Language](https://www.wolfram.com/language/) build in Finite Element Method. FEMAddOns supports 11.3 and later versions of Wolfram Language deployments for the desktop, including [Wolfram Desktop](https://www.wolfram.com/desktop/) and [Mathematica](https://www.wolfram.com/mathematica/).
 
 ### Installing the FEMAddOns release
 
