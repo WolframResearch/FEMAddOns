@@ -5,4 +5,5 @@ EndPackage[]
 Needs["NDSolve`FEM`"]
 Needs["DistMesh`"]
 Needs["DomainDecomposition`"]
+Needs["FEMUtils`"]
 

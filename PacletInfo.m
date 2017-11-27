@@ -10,6 +10,7 @@ Extensions -> {
 	{"Kernel", Context -> "FEMAddOns`"},
 	{"Kernel", Root -> "DistMesh/Kernel", Context -> {"DistMesh`"}},
 	{"Kernel", Root -> "DomainDecomposition/Kernel", Context -> {"DomainDecomposition`"}},
+	{"Kernel", Root -> "FEMUtils/Kernel", Context -> {"FEMUtils`"}},
 
 	{"Documentation", Root -> "DistMesh/Documentation"},
 	{"Documentation", Root -> "DomainDecomposition/Documentation"},
