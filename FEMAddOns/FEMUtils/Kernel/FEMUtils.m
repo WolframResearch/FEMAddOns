@@ -105,7 +105,7 @@ Block[
 		"MeshElements" -> mesh["MeshElements"], 
 		"BoundaryElements" -> mesh["BoundaryElements"], 
 		"PointElements" -> mesh["PointElements"], 
-		"CheckIncidentsCompletness" -> False, 
+		"CheckIncidentsCompleteness" -> False, 
 		"CheckIntersections" -> False, 
 		"DeleteDuplicateCoordinates" -> False,
 		"RegionHoles" -> mesh["RegionHoles"]
