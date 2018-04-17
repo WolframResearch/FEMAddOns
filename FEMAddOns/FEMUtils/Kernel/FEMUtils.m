@@ -78,7 +78,7 @@ Block[
 DirectElementMeshSmoothing[mesh_, 
 	opts : OptionsPattern[DirectElementMeshSmoothing]] := 
 Block[
-	{n, vec, mat, adjacencymatrix2, mass2, laplacian2, 
+	{n, vec, mat, adjacencymatrix2, mass2, laplacian2, typoOpt, 
 	bndvertices2, interiorvertices, stiffness, load, newCoords}, 
 
 	n = Length[mesh["Coordinates"]];
@@ -101,11 +101,17 @@ Block[
 
 	newCoords = LinearSolve[stiffness, load];
 
+	typoOpt = If[$VersionNumber <= 11.3,
+			"CheckIncidentsCompletness" -> False
+			,
+			"CheckIncidentsCompleteness" -> False
+		];
+
 	ToElementMesh["Coordinates" -> newCoords, 
 		"MeshElements" -> mesh["MeshElements"], 
 		"BoundaryElements" -> mesh["BoundaryElements"], 
 		"PointElements" -> mesh["PointElements"], 
-		"CheckIncidentsCompleteness" -> False, 
+		typoOpt,
 		"CheckIntersections" -> False, 
 		"DeleteDuplicateCoordinates" -> False,
 		"RegionHoles" -> mesh["RegionHoles"]
