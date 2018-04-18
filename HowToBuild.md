@@ -30,21 +30,9 @@ Next, build the documentation:
 
 This will create a folder named build, which will contain a folder FEMAddOns that contains the build documentation of package.
 
-Under Linux / Mac OS copy the code into the package:
-* Run the script copyContent.sh once to copy the code into the package.
-
-Under Windows OS copy the code into the package by opening CopyContent.nb and following the instructions there in.
-
-This will copy the source code into the build/FEMAddOns package.
-
-Last, create the Paclet:
-* Possibly increment the VersionNumber in PacletInfo.m
-* Load the paclet manager: Needs["PacletManager`"] 
-* Set the directory to the build folder: SetDirectory[...] 
-* Check: FileNames[] should return {"FEMAddOns"}
-* Create the paclet: PackPaclet["FEMAddOns"]
+Copy source code and create and install the paclet:
+* Open CopyContent.nb
+* Follow instructions to copy the source code
+* Follow instructions to create and install the paclet
 
 This will leave you with a path to a FEMAddOns-X.Y.paclet in the build folder.
-
-From here you can follow the instructions given in [Readme.md](Readme.md)
-

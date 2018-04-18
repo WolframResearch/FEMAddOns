@@ -1,9 +1,9 @@
 
-BeginPackage["FEMAddOns`"]
+BeginPackage["FEMAddOns`", {
+		"NDSolve`FEM`",
+		"DistMesh`",
+		"DomainDecomposition`",
+		"FEMUtils`"
+}]
 EndPackage[]
-
-Needs["NDSolve`FEM`"]
-Needs["DistMesh`"]
-Needs["DomainDecomposition`"]
-Needs["FEMUtils`"]
 
