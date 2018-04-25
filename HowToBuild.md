@@ -8,13 +8,13 @@
 
 #### Building FEMAddOns 
 First, import FEMAddOns in Workbench:
-* Select Import...
+* Select File -> Import...
 * Git - Projects from Git (Next)
 * Existing local repository (Next)
 * Add... (browse to FEMAddOns, select, Next)
 * Import as general project (Finish)
 
-The importing of the FEMAddOns needs to be done only once.
+Importing of the FEMAddOns source needs to be done only once.
 
 
 Next, build the documentation:
