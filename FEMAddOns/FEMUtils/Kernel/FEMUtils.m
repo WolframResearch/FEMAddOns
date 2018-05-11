@@ -192,7 +192,7 @@ StructuredMesh::array="Raster of input points must be full array of numbers with
 StructuredMesh//Options={InterpolationOrder->1};
 StructuredMesh[raster_,{nx_,ny_},opts:OptionsPattern[]]:=Module[
     {order,dim,restructured,xInt,yInt,zInt,nodes,connectivity},
-    If[Not@ArrayQ[raster,3,NumericQ],Message[StructuredMesh::array,3];Return[$Failed]];
+    If[Not@ArrayQ[raster,3,NumericQ],Message[StructuredMesh::array,3+1];Return[$Failed]];
 
     order=OptionValue[InterpolationOrder]/.Automatic->1;
     dim=Last@Dimensions[raster];
@@ -220,7 +220,7 @@ StructuredMesh[raster_,{nx_,ny_},opts:OptionsPattern[]]:=Module[
 
 StructuredMesh[raster_,{nx_,ny_,nz_},opts:OptionsPattern[]]:=Module[
     {order,restructured,xInt,yInt,zInt,nodes,connectivity},
-    If[Not@ArrayQ[raster,4,NumericQ],Message[StructuredMesh::array,4];Return[$Failed]];
+    If[Not@ArrayQ[raster,4,NumericQ],Message[StructuredMesh::array,4+1];Return[$Failed]];
 
     order=OptionValue[InterpolationOrder]/.Automatic->1;
        
