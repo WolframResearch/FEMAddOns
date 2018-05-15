@@ -29,6 +29,8 @@ ClearAll[DistMesh];
 DistMesh::usage = "DistMesh[r] creates an ElementMesh from a region r.";
 DistMesh::"bcond" = "`1` can not be used as predicate.";
 DistMesh::"bqal" = "The mesh quality goal of `1` could not be satisfied. The current mesh has a quality of `2`. Increasing the number of \"MaxIterations\" or lowering the \"MeshQualityGoal\" may help.";
+DistMesh::"bgrad" = "A close to zero derivative has been found during the computation. Setting \"ScaleDerivative\" -> False may help.";
+DistMesh::"noele" = "The requested \"MaxCellMeasure\" seems to coarse. Try setting \"MaxCellMeasure\" to a smaler value.";
 
 Options[DistMesh] = Sort[Join[{
   MaxIterations -> 150,
@@ -186,7 +188,6 @@ DistMesh[nr_NumericalRegion, opts : OptionsPattern[DistMesh]] :=
         deltat = 0.1;
       ];
       deps = Sqrt[$MachineEpsilon] * h0;
-
       cond = nr["Predicates"];
       vars = nr["PredicateVariables"];
 
@@ -245,6 +246,10 @@ DistMesh[nr_NumericalRegion, opts : OptionsPattern[DistMesh]] :=
 
         If[Max[Sqrt[Total[(p - pOld)^2, {2}]] / h0] > ttol,
           pOld = p;
+          If[ Length[p] < 3,
+            Message[DistMesh::"noele"];
+            Return[$Failed, Module]
+          ];
           {p, t} = myDelaunay[p];
           pMid =
               Total[NDSolve`FEM`GetElementCoordinates[p, t], {2}] / (dim + 1);
@@ -270,6 +275,10 @@ DistMesh[nr_NumericalRegion, opts : OptionsPattern[DistMesh]] :=
         ];
         If[TrueQ[OptionValue["ScaleDerivative"]],
           dgrad = Total[dgradN^2, {2}];
+          If[ Abs[dgrad] <= $MachinePrecision,
+            Message[DistMesh::"bgrad"];
+            Break[]
+		];
           (* dgrad could have zeros *)
           p[[ix]] = p[[ix]] - (d[[ix]] * dgradN) / dgrad;
           ,

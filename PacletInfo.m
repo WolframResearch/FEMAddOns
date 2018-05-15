@@ -4,7 +4,7 @@
 
 Paclet[
 Name -> "FEMAddOns",
-Version -> "1.0",
+Version -> "1.0.1",
 MathematicaVersion -> "11+",
 Extensions -> {
 	{"Kernel", Context -> "FEMAddOns`"},
