@@ -31,7 +31,7 @@ Next, build the documentation:
 This will create a folder named build, which will contain a folder FEMAddOns that contains the build documentation of package.
 
 Copy source code and create and install the paclet:
-* Open CopyContent.nb
+* Open CreatePaclet.nb
 * Follow instructions to copy the source code
 * Follow instructions to create and install the paclet
 
