@@ -11,7 +11,7 @@ ClearAll[ElementMeshSmoothing];
 ElementMeshSmoothing::usage = "ElementMeshSmoothing[mesh] smoothes an ElementMesh.";
 Options[ElementMeshSmoothing] = {Method -> Automatic};
 
-ClearAll[StructuredMesh]
+ClearAll[StructuredMesh];
 StructuredMesh::usage="StructuredMesh[raster,{nx,ny}] creates structured mesh of quadrilaterals.
 StructuredMesh[raster,{nx,ny,nz}] creates structured mesh of hexahedra.";
 
@@ -152,23 +152,24 @@ Block[
 (* ::Subsubsection:: *)
 (*Structured mesh*)
 
+StructuredMesh::array = "Raster of input points must be a full array of numbers with depth of `1`.";
+Options[StructuredMesh] = {InterpolationOrder->1};
 
-getElementConnectivity[nx_,ny_]:=Flatten[
+
+getElementConnectivity[nx_, ny_] := Flatten[
 	Table[{
 		i+(j-1)(nx+1),
 		i+(j-1)(nx+1)+1,
 		i+j(nx+1)+1,
 		i+j(nx+1)
 		},
-		{j,1,ny},
-        {i,1,nx}
+		{j, 1, ny},
+        {i, 1, nx}
    ],
    1
 ]
 
-(* =====================================================================\[Equal] *)
-
-getElementConnectivity[nx_,ny_,nz_]:=Flatten[
+getElementConnectivity[nx_, ny_, nz_] := Flatten[
 	Table[{
 		i+(j-1)(nx+1)+(k-1)(nx+1)(ny+1),
 		i+(j-1)(nx+1)+(k-1)(nx+1)(ny+1)+1,
@@ -179,67 +180,84 @@ getElementConnectivity[nx_,ny_,nz_]:=Flatten[
 		i+j(nx+1)+k(nx+1)(ny+1)+1,
 		i+j(nx+1)+k(nx+1)(ny+1)
         },
-        {k,1,nz},
-        {j,1,ny},
-        {i,1,nx}
+        {k, 1, nz},
+        {j, 1, ny},
+        {i, 1, nx}
     ],
     2
 ]
 
 
-StructuredMesh::array="Raster of input points must be full array of numbers with depth of `1`.";
+StructuredMesh[raster_, {nx_, ny_}, opts:OptionsPattern[]
+	] /; Length[raster] > 1 :=
+Module[
+    {order, dim, restructured, xInt, yInt, zInt, nodes, connectivity},
+    If[ Not @ ArrayQ[raster, 3, NumericQ],
+		Message[StructuredMesh::array, 3+1];
+		Return[$Failed, Module]
+	];
 
-StructuredMesh//Options={InterpolationOrder->1};
-StructuredMesh[raster_,{nx_,ny_},opts:OptionsPattern[]]:=Module[
-    {order,dim,restructured,xInt,yInt,zInt,nodes,connectivity},
-    If[Not@ArrayQ[raster,3,NumericQ],Message[StructuredMesh::array,3+1];Return[$Failed]];
+    order = OptionValue[InterpolationOrder] /. Automatic->1;
+    dim = Last @ Dimensions[raster];
 
-    order=OptionValue[InterpolationOrder]/.Automatic->1;
-    dim=Last@Dimensions[raster];
+    restructured = Transpose[raster, {3, 2, 1}];
+    xInt = ListInterpolation[restructured[[1]], {{0, 1}, {0, 1}},
+		InterpolationOrder->order];
+    yInt = ListInterpolation[restructured[[2]], {{0, 1}, {0, 1}},
+		InterpolationOrder->order];
 
-    restructured=Transpose[raster,{3,2,1}];
-    xInt=ListInterpolation[restructured[[1]],{{0,1},{0,1}},InterpolationOrder->order];
-    yInt=ListInterpolation[restructured[[2]],{{0,1},{0,1}},InterpolationOrder->order];
-
-    nodes=Flatten[#,1]&@If[dim==3,
-        zInt=ListInterpolation[restructured[[3]],{{0,1},{0,1}},InterpolationOrder->order];
-        Table[{xInt[i,j],yInt[i,j],zInt[i,j]},{j,0,1,1./ny},{i,0,1,1./nx}]
-        ,
-        Table[{xInt[i,j],yInt[i,j]},{j,0,1,1./ny},{i,0,1,1./nx}]
+    nodes = Flatten[#, 1]& @ If[ dim == 3,
+        zInt = ListInterpolation[restructured[[3]], {{0, 1}, {0, 1}},
+			InterpolationOrder->order];
+        Table[{xInt[i, j], yInt[i, j], zInt[i, j]},
+			{j, 0, 1, 1./ny}, {i, 0, 1, 1./nx}]
+        , (* else *)
+        Table[{xInt[i, j], yInt[i, j]},
+			{j, 0, 1, 1./ny}, {i, 0, 1, 1./nx}]
     ];
 
-    connectivity=getElementConnectivity[nx,ny];
+    connectivity = getElementConnectivity[nx, ny];
 
-    If[dim==3,
-        ToBoundaryMesh["Coordinates"->nodes,"BoundaryElements"->{QuadElement[connectivity]}],
-        ToElementMesh["Coordinates"->nodes,"MeshElements"->{QuadElement[connectivity]}]
+    If[ dim == 3,
+        ToBoundaryMesh["Coordinates"->nodes,
+			"BoundaryElements"->{QuadElement[connectivity]}]
+		, (* else *)
+        ToElementMesh["Coordinates"->nodes,
+			"MeshElements"->{QuadElement[connectivity]}]
     ]
 ]
 
-(* ===================================================================================== *)
+StructuredMesh[raster_, {nx_, ny_, nz_}, opts:OptionsPattern[]
+	] /; Length[raster] > 1 :=
+Module[
+    {order, restructured, xInt, yInt, zInt, nodes, connectivity},
+    If[ Not @ ArrayQ[raster, 4, NumericQ],
+		Message[StructuredMesh::array, 4+1];
+		Return[$Failed, Module]
+	];
 
-StructuredMesh[raster_,{nx_,ny_,nz_},opts:OptionsPattern[]]:=Module[
-    {order,restructured,xInt,yInt,zInt,nodes,connectivity},
-    If[Not@ArrayQ[raster,4,NumericQ],Message[StructuredMesh::array,4+1];Return[$Failed]];
-
-    order=OptionValue[InterpolationOrder]/.Automatic->1;
+    order = OptionValue[InterpolationOrder] /. Automatic->1;
        
-    restructured=Transpose[raster,{4, 3, 2, 1}];
-    xInt=ListInterpolation[restructured[[1]],{{0,1},{0,1},{0,1}},InterpolationOrder->order];
-    yInt=ListInterpolation[restructured[[2]],{{0,1},{0,1},{0,1}},InterpolationOrder->order];
-    zInt=ListInterpolation[restructured[[3]],{{0,1},{0,1},{0,1}},InterpolationOrder->order];
+    restructured = Transpose[raster, {4, 3, 2, 1}];
+    xInt = ListInterpolation[restructured[[1]], {{0, 1}, {0, 1}, {0, 1}},
+		InterpolationOrder->order];
+    yInt = ListInterpolation[restructured[[2]], {{0, 1}, {0, 1}, {0, 1}},
+		InterpolationOrder->order];
+    zInt = ListInterpolation[restructured[[3]], {{0, 1}, {0, 1}, {0, 1}},
+		InterpolationOrder->order];
     
-    nodes=Flatten[
+    nodes = Flatten[
        Table[
-          {xInt[i,j,k],yInt[i,j,k],zInt[i,j,k]},
-          {k,0,1,1./nz},{j,0,1,1./ny},{i,0,1,1./nx}
+          {xInt[i, j, k], yInt[i, j, k], zInt[i, j, k]},
+          {k, 0, 1, 1./nz}, {j, 0, 1, 1./ny}, {i, 0, 1, 1./nx}
        ],
        2
     ];
 
-    connectivity=getElementConnectivity[nx,ny,nz];
+    connectivity = getElementConnectivity[nx, ny, nz];
     
-    ToElementMesh["Coordinates"->nodes,"MeshElements"->{HexahedronElement[connectivity]}]
+    ToElementMesh["Coordinates"->nodes,
+		"MeshElements"->{HexahedronElement[connectivity]}]
 ]
 
 
