@@ -275,7 +275,7 @@ DistMesh[nr_NumericalRegion, opts : OptionsPattern[DistMesh]] :=
         ];
         If[TrueQ[OptionValue["ScaleDerivative"]],
           dgrad = Total[dgradN^2, {2}];
-          If[ Abs[dgrad] <= $MachinePrecision,
+          If[ Min[Abs[dgrad]] <= $MachineEpsilon,
             Message[DistMesh::"bgrad"];
             Break[]
 		];
