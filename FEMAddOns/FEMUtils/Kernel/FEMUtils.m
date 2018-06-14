@@ -155,6 +155,7 @@ Block[
 (* ::Subsubsection:: *)
 (*Structured mesh*)
 
+
 StructuredMesh::array = "Raster of input points must be a full array of numbers with depth of `1`.";
 Options[StructuredMesh] = {InterpolationOrder->1};
 
@@ -313,7 +314,7 @@ Module[
 	econn = Join @@ mesh["ElementConnectivity"];
 	(* zero is used as a default marker *)
 	marker = Join @@ ElementMarkers[ mesh["MeshElements"]];
-	markerQ = ElementMarkersQ[m1["MeshElements"]];
+	markerQ = ElementMarkersQ[mesh["MeshElements"]];
 	elem = Join @@ ElementIncidents[ mesh["MeshElements"]];	
 	
 	dist = MapThread[ (
