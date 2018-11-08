@@ -14,15 +14,13 @@ StructuredMesh[raster,{nx,ny,nz}] creates structured mesh of hexahedra.";
 ClearAll[ToQuadMesh]
 ToQuadMesh::usage="ToQuadMesh[mesh] converts triangular mesh to quadrilateral mesh.";
 
+ClearAll[UpdateFEMAddOns]
+UpdateFEMAddOns::usage="UpdateFEMAddOns[] downloads and installes the latest version of the FEMAddOns paclet.";
+
 
 Begin["`Private`"];
 
 
-(* ::Subsubsection:: *)
-(*ElementMeshSmoothing*)
-
-
-$defaultMaxIter = 150;
 ClearAll[IterativeElementMeshSmoothing];
 Options[IterativeElementMeshSmoothing] = {MaxIterations -> $defaultMaxIter};
 
@@ -152,8 +150,6 @@ Block[
 ]
 
 
-(* ::Subsubsection:: *)
-(*Structured mesh*)
 
 
 StructuredMesh::array = "Raster of input points must be a full array of numbers with depth of `1`.";
@@ -265,8 +261,6 @@ Module[
 ]
 
 
-(* ::Subsubsection:: *)
-(*ToQuadMesh*)
 
 
 (*
@@ -408,8 +402,37 @@ Module[
 ]
 
 
-(* ::Subsubsection:: *)
-(*End Package*)
+(* first seen at https://github.com/szhorvat/IGraphM#installation *)
+UpdateFEMAddOns[] :=
+Module[
+	{json, download, target, msg},
+	Check[
+		json = Import[
+			"https://api.github.com/repos/WolframResearch/FEMAddOns/releases"
+			, "JSON"];
+		download = Lookup[ First[ Lookup[ First[json], "assets"]],
+			"browser_download_url"];
+		msg = "Downloading FEMAddOns " <> Lookup[First[json], "tag_name"] <> " ...";
+		target = FileNameJoin[{CreateDirectory[], "FEMAddOns.paclet"}];
+
+		If[ $Notebooks,
+			PrintTemporary@ Labeled[
+				ProgressIndicator[Appearance -> "Necklace"], msg, Right]
+		,
+			Print[msg]
+		];
+		URLSave[download, target]
+	,
+		Return[$Failed]
+	];
+
+	If[ FileExistsQ[target],
+		PacletManager`PacletInstall[target]
+	,
+		$Failed
+	]
+]
+
 
 
 End[];
