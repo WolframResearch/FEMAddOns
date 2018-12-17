@@ -23,6 +23,13 @@ To make use of the documentation it may be necessary to restart.
 
 To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. 
 
+For example generate structured meshes:
+
+	raster = Table[#, {fi, 0, 2 Pi, 2 Pi/360}] & /@ {{Cos[fi], Sin[fi]}, 0.8*{Cos[fi], Sin[fi]}};
+	mesh = StructuredMesh[raster, {90, 5}];
+	mesh["Wireframe"]
+
+![StructuredMesh](Images/structuredMesh.png)
 
 ### More...
 
