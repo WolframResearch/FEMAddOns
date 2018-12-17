@@ -23,13 +23,43 @@ To make use of the documentation it may be necessary to restart.
 
 To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. 
 
-For example generate structured meshes:
+For example generate structured meshes with `StructuredMesh`:
 
 	raster = Table[#, {fi, 0, 2 Pi, 2 Pi/360}] & /@ {{Cos[fi], Sin[fi]}, 0.8*{Cos[fi], Sin[fi]}};
 	mesh = StructuredMesh[raster, {90, 5}];
 	mesh["Wireframe"]
 
 ![StructuredMesh](Images/structuredMesh.png)
+
+
+With `ToQuadMesh` convert triangle meshes into quadrilateral meshes:
+
+	region = ImplicitRegion[And @@ (# <= 0 & /@ {-y, 1/25 - (-3/2 + x)^2 - y^2, 
+       1 - x^2 - y^2, -4 + x^2 + y^2, y - x*Tan[Pi/8]}), {x, y}];
+	ToQuadMesh[ToElementMesh[region]]["Wireframe"]
+
+![triMeshToQuadMesh](Images/triMeshToQuadMesh.png)
+
+
+Use the `DistMesh` mesh generator to create smooth meshes:
+
+	mesh = DistMesh[RegionDifference[Rectangle[{-1, -1}, {1, 1}], Disk[{0, 0}, 1/2]], 
+	   "DistMeshRefinementFunction" -> 
+	    Function[{x, y}, Min[4*Sqrt[Plus @@ ({x, y}^2)] - 1, 2]], 
+	   "MaxCellMeasure" -> {"Length" -> 0.05}, 
+	   "IncludePoints" -> {{-1, -1}, {-1, 1}, {1, -1}, {1, 1}}]; 
+	mesh["Wireframe"]
+
+![DistMesh](Images/distMesh.png)
+
+
+Use `DomainDecomposition` to solve stationary PDEs on a cluster:
+
+	kernels = LaunchKernels[24];
+	DecompositionNDSolveValue[{Laplacian[u[x, y], {x, y}] == 1, 
+	  DirichletCondition[u[x, y] == 0, 
+	   x == 0 || x == 5 || y == 0 || y == 1]}, u, Element[{x, y}, 
+	  Rectangle[{0, 0}, {5, 1}]], "Kernels" -> kernels]
 
 ### More...
 
