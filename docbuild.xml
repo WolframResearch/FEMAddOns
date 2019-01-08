@@ -125,7 +125,14 @@ or set Mathematica.DocumentationBuild.createHTML.setting to Mathematica.Document
 		</fileset>
 		</copy>
 	</target>
-	
+		
+    <target name="Applications">
+        <antcall target="docbuild">
+            <param name="docInputDir" value="FEMAddOns/Applications/Documentation"/>
+            <param name="docOutputDir" value="Applications/Documentation"/>
+        </antcall>
+    </target>
+
     <target name="DistMesh">
         <antcall target="docbuild">
             <param name="docInputDir" value="FEMAddOns/DistMesh/Documentation"/>
