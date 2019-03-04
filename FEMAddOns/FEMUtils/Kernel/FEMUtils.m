@@ -20,7 +20,7 @@ UpdateFEMAddOns::usage="UpdateFEMAddOns[] downloads and installes the latest ver
 
 Begin["`Private`"];
 
-
+$defaultMaxIter = 150;
 ClearAll[IterativeElementMeshSmoothing];
 Options[IterativeElementMeshSmoothing] = {MaxIterations -> $defaultMaxIter};
 
