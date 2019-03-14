@@ -21,7 +21,7 @@ To make use of the documentation it may be necessary to restart.
 
 ### Using FEMAddOns
 
-To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. 
+To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link the the FEM Applications.
 
 For example generate structured meshes with `StructuredMesh`:
 
