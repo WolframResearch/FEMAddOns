@@ -5,6 +5,8 @@ The [Wolfram Language](https://www.wolfram.com/language/) has build in support f
 
 ### Installing the FEMAddOns release
 
+**First time install** 
+
 The FEMAddOns release comes in the form of a `.paclet` file, which contains the entire package and its documentation. Download the latest release from the [Github repo's releases page](https://github.com/WolframResearch/FEMAddOns/releases). To install, run the following command in the Wolfram Language:
 
     PacletInstall["/full/path/to/FEMAddOns.paclet"]
@@ -19,9 +21,18 @@ And all versions can be uninstalled using the command:
 
 To make use of the documentation it may be necessary to restart.
 
+**Subsequent installs** 
+
+If you have a previous version (>=1.3.0) of the FEMAddOns installed you can use
+
+	Needs["FEMAddOns`"]
+	UpdateFEMAddOns[]
+
+to update to the latest version.
+
 ### Using FEMAddOns
 
-To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link the the FEM Applications.
+To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link to the FEM Applications.
 
 For example generate structured meshes with `StructuredMesh`:
 
