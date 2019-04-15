@@ -32,7 +32,7 @@ to update to the latest version.
 
 ### Using FEMAddOns
 
-To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link to the FEM Applications.
+To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link to *contributed FEM Applications*.
 
 For example generate structured meshes with `StructuredMesh`:
 
