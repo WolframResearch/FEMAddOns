@@ -467,7 +467,11 @@ Module[
 	];
 
 	If[ FileExistsQ[target],
-		PacletManager`PacletInstall[target]
+		(* we overwrite if the paclet is already installed because
+			testing for a version is tricky, we anyways have downloaded
+			the paclet and trying to install the same version gives
+			an error message that is not wanted in this case. *)
+		PacletManager`PacletInstall[target, "IgnoreVersion" -> True]
 	,
 		$Failed
 	]
