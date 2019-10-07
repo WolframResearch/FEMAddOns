@@ -9,7 +9,7 @@ The [Wolfram Language](https://www.wolfram.com/language/) has build in support f
 
 The easiest way to install or update the FEMAddOns is to evaluate the following:
 
-    ResourceObject["FEMAddOnsInstall"][]
+    ResourceFunction["FEMAddOnsInstall"][]
 
 This will permanently install the FEMAddOns paclet. The Wolfram Language will always use the latest installed version of FEMAddOns. Installed versions can be enumerated using the command:
 
