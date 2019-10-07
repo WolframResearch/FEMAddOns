@@ -7,11 +7,11 @@ The [Wolfram Language](https://www.wolfram.com/language/) has build in support f
 
 ### Installing the FEMAddOns release
 
-**First time install** 
+**Install / Update** 
 
-The FEMAddOns release comes in the form of a `.paclet` file, which contains the entire package and its documentation. Download the latest release from the [Github repo's releases page](https://github.com/WolframResearch/FEMAddOns/releases). To install, run the following command in the Wolfram Language:
+The easiest way to install or update the FEMAddOns is to evaluate the following:
 
-    PacletInstall["/full/path/to/FEMAddOns.paclet"]
+    ResourceObject["FEMAddOnsInstall"][]
 
 This will permanently install the FEMAddOns paclet. The Wolfram Language will always use the latest installed version of FEMAddOns. Installed versions can be enumerated using the command:
 
@@ -81,3 +81,4 @@ See the following files for more information:
 * [License.md](License.md) - FEMAddOns license
 * [Contributing.md](Contributing.md) - Guidelines for contributing to FEMAddOns
 * [HowToBuild.md](HowToBuild.md) - Instructions for building and debugging FEMAddOns
+* [AlternativeInstallation.md](AlternativeInstallation.md) - Alternative instructions for installing the  FEMAddOns paclet
