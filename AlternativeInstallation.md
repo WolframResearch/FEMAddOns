@@ -5,4 +5,13 @@ The FEMAddOns release comes in the form of a `.paclet` file, which contains the 
 
     PacletInstall["/full/path/to/FEMAddOns.paclet"]
 
+**Subsequent installs** 
+
+If you have a previous version (>=1.3.0) of the FEMAddOns installed you can use
+
+	Needs["FEMAddOns`"]
+	UpdateFEMAddOns[]
+
+to update to the latest version.
+
 

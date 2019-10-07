@@ -23,15 +23,6 @@ And all versions can be uninstalled using the command:
 
 To make use of the documentation it may be necessary to restart.
 
-**Subsequent installs** 
-
-If you have a previous version (>=1.3.0) of the FEMAddOns installed you can use
-
-	Needs["FEMAddOns`"]
-	UpdateFEMAddOns[]
-
-to update to the latest version.
-
 ### Using FEMAddOns
 
 To access the documentation, open the notebook interface help viewer, and search for FEMAddOns. The first hit will be a summary page enumerating the most commonly used functions in FEMAddOns. From there you can also follow the link to *contributed FEM Applications*.
