@@ -11,7 +11,8 @@ The easiest way to install or update the FEMAddOns is to evaluate the following:
 
     ResourceFunction["FEMAddOnsInstall"][]
 
-This will permanently install the FEMAddOns paclet. The Wolfram Language will always use the latest installed version of FEMAddOns. Installed versions can be enumerated using the command:
+This will permanently install the latest version of the FEMAddOns paclet. Installed versions can be enumerated using the command:
+
 
     PacletFind["FEMAddOns"]
 
