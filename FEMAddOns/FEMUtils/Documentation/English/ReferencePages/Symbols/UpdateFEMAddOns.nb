@@ -370,10 +370,10 @@ Cell[BoxData[
  CellID->589267740,ExpressionUUID->"03666e2e-7c77-4fea-a26e-ebd96acd84aa"]
 }, Open  ]]
 },
-WindowSize->{956, 1041},
-WindowMargins->{{2, Automatic}, {Automatic, 18}},
+WindowSize->{316, 1041},
+WindowMargins->{{Automatic, 2}, {Automatic, 18}},
 CellContext->"Global`",
-FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStyles.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
@@ -496,7 +496,7 @@ Cell[7222, 227, 242, 5, 16, "ExampleDelimiter",ExpressionUUID->"f546393a-801a-4c
  CellID->184292590],
 Cell[7467, 234, 115, 1, 23, "ExampleText",ExpressionUUID->"29797bb0-8076-40d0-a7d4-27a26887ef48",
  CellID->810745662],
-Cell[7585, 237, 412, 7, 47, "Input",ExpressionUUID->"42a1db80-d46f-40d4-ae15-8ec57f948118",
+Cell[7585, 237, 412, 7, 44, "Input",ExpressionUUID->"42a1db80-d46f-40d4-ae15-8ec57f948118",
  InitializationCell->True,
  CellID->49404476],
 Cell[8000, 246, 275, 7, 23, "ExampleText",ExpressionUUID->"d801cf99-1d8d-43c6-927a-ef043a1a5d85",

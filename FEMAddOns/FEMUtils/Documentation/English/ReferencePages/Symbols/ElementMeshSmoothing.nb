@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    279880,       6302]
+NotebookDataLength[    279877,       6302]
 NotebookOptionsPosition[    256874,       5824]
-NotebookOutlinePosition[    258068,       5858]
-CellTagsIndexPosition[    257987,       5853]
+NotebookOutlinePosition[    258065,       5858]
+CellTagsIndexPosition[    257984,       5853]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -5822,8 +5822,8 @@ Cell["XXXX", "FunctionEssay",
  CellID->356990964,ExpressionUUID->"fffe77f6-0912-45d0-890a-2f8aeac8fd35"]
 }, Open  ]]
 },
-WindowSize->{956, 1041},
-WindowMargins->{{Automatic, 2}, {Automatic, 18}},
+WindowSize->{379, 1041},
+WindowMargins->{{Automatic, 770}, {Automatic, 18}},
 TaggingRules->{
  "DocuToolsSettingsInternal" -> {
    "$PacletVersion" -> "0.9.1871", "$MVersion" -> "11", "$FlaggedVersion" -> 
@@ -5835,7 +5835,7 @@ TaggingRules->{
   "ruebenko", "CreationDate" -> "11-27-2017 16:59:57"},
 CellContext->Notebook,
 Magnification:>1.5 Inherited,
-FrontEndVersion->"11.2 for Linux x86 (64-bit) (September 10, 2017)",
+FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStyles.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
@@ -5852,7 +5852,7 @@ CellTagsIndex->{
 *)
 (*CellTagsIndex
 CellTagsIndex->{
- {"ExtendedExamples", 257792, 5846}
+ {"ExtendedExamples", 257789, 5846}
  }
 *)
 (*NotebookFileOutline
@@ -5951,7 +5951,7 @@ Cell[9367, 267, 610, 15, 41, "Notes",ExpressionUUID->"b6039c9d-cce8-45e2-be56-25
  CellID->808899030],
 Cell[9980, 284, 467, 9, 41, "Notes",ExpressionUUID->"0ddec283-bd85-4d34-ab5e-0ce4b3f55618",
  CellID->1269807375],
-Cell[10450, 295, 2547, 39, 38, "3ColumnTableMod",ExpressionUUID->"a3f2a52e-f28b-422b-a38a-1742fd33e9c8",
+Cell[10450, 295, 2547, 39, 36, "3ColumnTableMod",ExpressionUUID->"a3f2a52e-f28b-422b-a38a-1742fd33e9c8",
  CellID->698312613]
 }, Open  ]],
 Cell[CellGroupData[{
@@ -5975,7 +5975,7 @@ Cell[13700, 360, 104, 1, 26, "RelatedLinks",ExpressionUUID->"893a84d9-9c9e-400f-
 Cell[CellGroupData[{
 Cell[13841, 366, 110, 1, 48, "SeeAlsoSection",ExpressionUUID->"854261b9-ae8d-4f15-8c30-0db98304e5f9",
  CellID->1255426704],
-Cell[13954, 369, 1050, 24, 30, "SeeAlso",ExpressionUUID->"85c545fc-61ce-42ae-a32b-c01415f3fc3b",
+Cell[13954, 369, 1050, 24, 31, "SeeAlso",ExpressionUUID->"85c545fc-61ce-42ae-a32b-c01415f3fc3b",
  CellID->929782353]
 }, Open  ]],
 Cell[CellGroupData[{

@@ -17,8 +17,29 @@ ToQuadMesh::usage="ToQuadMesh[mesh] converts triangular mesh to quadrilateral me
 ClearAll[UpdateFEMAddOns]
 UpdateFEMAddOns::usage="UpdateFEMAddOns[] downloads and installes the latest version of the FEMAddOns paclet.";
 
+ClearAll[
+	BoundaryElementMeshDifference,
+	BoundaryElementMeshIntersection,
+	BoundaryElementMeshJoin,
+	BoundaryElementMeshRotation,
+	BoundaryElementMeshSymmetricDifference,
+	BoundaryElementMeshTranslate,
+	BoundaryElementMeshUnion
+]
+
+BoundaryElementMeshDifference::usage="";
+BoundaryElementMeshIntersection::usage="";
+BoundaryElementMeshJoin::usage="";
+BoundaryElementMeshRotation::usage="";
+BoundaryElementMeshSymmetricDifference::usage="";
+BoundaryElementMeshTranslate::usage="";
+BoundaryElementMeshUnion::usage="";
+
+
 
 Begin["`Private`"];
+
+pack = Developer`ToPackedArray;
 
 $defaultMaxIter = 150;
 ClearAll[IterativeElementMeshSmoothing];
@@ -476,6 +497,166 @@ Module[
 		$Failed
 	]
 ]
+
+
+(**)
+(* Boundary ElementMesh Booleans *)
+(**)
+
+ClearAll[validInputQ]
+validInputQ[bm1_, bm2_] := 
+	BoundaryElementMeshQ[bm1] && BoundaryElementMeshQ[bm2] &&
+		(bm1["EmbeddingDimension"] === bm2["EmbeddingDimension"]) &&
+			(bm1["MeshOrder"] === bm2["MeshOrder"] === 1)
+
+(*
+For RegionDifference, Intersection... (but not ReginUnion) we need a full region representation to do the operation. A boundary representation like MeshRegion does not work as the operation means something different. For RegionUnion it matters less but it generates sometimes wanted sometimes not wanted internal boundaries. So if a boundary mesh region can not be generated and the operation is RegionUnion then we assume that we have internal boundaries and do the operation. The disadvantage of using BoundaryMeshRegion is that internal boundaries can not be dealt with. Alternatively, we could generate a full element mesh from the boundary, convert that to a MeshRegion do the operation and convert that to a boundary element mesh; that however, crashes.
+*)
+ClearAll[MakeBoundaryElementMeshBooleanOperation]
+MakeBoundaryElementMeshBooleanOperation[op_, funName_] := 
+Return[
+	funName[bm1_, bm2_, opts:OptionsPattern[ToBoundaryMesh]] /; validInputQ[bm1, bm2] :=
+	Module[
+		{m1, m2, rop, r, successQ},
+		m1 = BoundaryMeshRegion[bm1];
+		m2 = BoundaryMeshRegion[bm2];
+		If[ (!BoundaryMeshRegionQ[m1] || !BoundaryMeshRegionQ[m2]) &&
+				op === RegionUnion,
+			m1 = MeshRegion[bm1];
+			m2 = MeshRegion[bm2];
+		];
+
+		rop = op[m1, m2];
+		successQ = (BoundaryMeshRegionQ[rop] || MeshRegionQ[rop]);
+
+		WarnIf[ !successQ,
+			funName,
+			"The `1` of the boundary element meshes `2` and `3` failed",
+			op, bm1, bm2
+		];
+		If[ !successQ, Return[$Failed, Module]];
+
+		r = ToBoundaryMesh[rop, opts];
+		r
+	]
+]
+
+
+(**)
+(* Difference *)
+(**)
+MakeBoundaryElementMeshBooleanOperation[RegionDifference,
+	BoundaryElementMeshDifference];
+
+(**)
+(* Intersection *)
+(**)
+MakeBoundaryElementMeshBooleanOperation[RegionIntersection,
+	BoundaryElementMeshIntersection];
+
+
+
+(**)
+(* Join *)
+(**)
+
+BoundaryElementMeshJoin[bm1_, bm2_, opts:OptionsPattern[ToBoundaryMesh]] /; validInputQ[bm1, bm2] :=
+Module[
+	{c1, c2, nc1, newBCEle, newPEle, eleTypes, markers},
+
+	c1 = bm1["Coordinates"];
+	c2 = bm2["Coordinates"];
+	nc1 = Length[c1];
+
+	newBCEle = bm2["BoundaryElements"];
+	eleTypes = Head /@ newBCEle;
+	If[ ElementMarkersQ[newBCEle],
+		markers = ElementMarkers[newBCEle]
+	,
+		markers = Sequence[]
+	];
+	newBCEle = MapThread[#1[##2] &,
+		{eleTypes, ElementIncidents[newBCEle] + nc1, markers}];
+
+	newPEle = bm2["PointElements"];
+	eleTypes = Head /@ newPEle;
+	If[ ElementMarkersQ[newPEle],
+		markers = ElementMarkers[newPEle]
+	,
+		markers = Sequence[]
+	];
+	newPEle = MapThread[#1[##2] &,
+		{eleTypes, ElementIncidents[newPEle] + nc1, markers}];
+
+
+	ToBoundaryMesh[
+		"Coordinates" -> Join[c1, c2], 
+		"BoundaryElements" -> Flatten[{bm1["BoundaryElements"], newBCEle}],
+		"PointElements" -> Flatten[{bm1["PointElements"], newPEle}],
+		opts
+	]
+]
+
+(*BoundaryElementMeshJoin[bm1_,bmRest__]/;validInputQ[bm1,bmRest[[1]]]\
+:=Fold[BoundaryElementMeshJoin,bm1,{bmRest}]*)
+
+BoundaryElementMeshJoin[r1_, r2_, r3__] := 
+ BoundaryElementMeshJoin[BoundaryElementMeshJoin[r1, r2], r3];
+
+
+(**)
+(* Rotation *)
+(**)
+BoundaryElementMeshRotation[bm_, rm_, opts:OptionsPattern[ToBoundaryMesh]] /; validInputQ[bm, bm] && MatrixQ[rm] := 
+Module[
+	{c},
+	c = bm["Coordinates"];
+	c = rm.# & /@ c;
+
+	ToBoundaryMesh[
+		"Coordinates" -> c,
+		"BoundaryElements" -> bm["BoundaryElements"],
+		"PointElements" -> bm["PointElements"],
+		opts
+	]
+]
+
+
+(**)
+(* SymmetricDifference *)
+(**)
+MakeBoundaryElementMeshBooleanOperation[RegionSymmetricDifference,
+	BoundaryElementMeshSymmetricDifference];
+
+
+(**)
+(* Translate *)
+(**)
+BoundaryElementMeshTranslate[bm_, vector_, opts:OptionsPattern[ToBoundaryMesh]] /; validInputQ[bm, bm] &&
+	ArrayQ[vector, 1, NumericQ] && Length[vector] === bm["EmbeddingDimension"] := 
+Module[
+	{c, tt},
+	c = bm["Coordinates"];
+	tt = TranslationTransform[vector];
+	c = tt /@ c;
+
+	ToBoundaryMesh[
+		"Coordinates" -> c, 
+		"BoundaryElements" -> bm["BoundaryElements"], 
+		"PointElements" -> bm["PointElements"],
+		opts
+	]
+]
+
+
+
+(**)
+(* Union *)
+(**)
+MakeBoundaryElementMeshBooleanOperation[RegionUnion, BoundaryElementMeshUnion];
+
+BoundaryElementMeshUnion[r1_, r2_, r3__] :=
+ BoundaryElementMeshUnion[BoundaryElementMeshUnion[r1, r2], r3]
 
 
 
