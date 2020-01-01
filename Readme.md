@@ -13,7 +13,7 @@ The easiest way to install or update the FEMAddOns is to evaluate the following:
 
 The use of the ResourceFunction requires you to log into your wolfram account. If you can not or do not want to do that then you can install the latest release of the FEMAddOns-X.Y.Z.paclet from the [Github repo's releases page](https://github.com/WolframResearch/FEMAddOns/releases). To install, run the following command in the Wolfram Language:
 
-    PacletInstall["/full/path/to/FEMAddOns.paclet"]
+    PacletInstall["/full/path/to/FEMAddOnsX.Y.Z.paclet"]
 
 Either installation will permanently install the latest version of the FEMAddOns paclet. Installed versions can be enumerated using the command:
 
