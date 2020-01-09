@@ -403,7 +403,6 @@ Cell[TextData[{
  CellID->731960677,ExpressionUUID->"ef580454-1e4c-404e-be36-8deaf2a6cad1"],
 
 Cell[TextData[{
- "If ",
  Cell[BoxData[
  "DistMesh"], "InlineFormula",ExpressionUUID->
   "78bd9103-b32c-49be-94c2-98855e564b6c"],
@@ -414,7 +413,7 @@ Cell[TextData[{
    3.564383808838224*^9}, {3.5685808337522163`*^9, 3.5685808388142433`*^9}, 
    3.568581811779914*^9, {3.571613775786443*^9, 3.57161378356258*^9}, 
    3.572697972598325*^9, {3.6379206023256187`*^9, 3.637920604397703*^9}, {
-   3.647577064767662*^9, 3.64757709147332*^9}},
+   3.647577064767662*^9, 3.64757709147332*^9}, 3.7875518460065002`*^9},
  CellID->1624908004,ExpressionUUID->"45873f5d-c2a1-4356-920c-81b87db7a233"]
 }, Open  ]],
 
@@ -10556,12 +10555,12 @@ Cell[BoxData[
  CellID->589267740,ExpressionUUID->"86b06dce-6de9-456c-aa0a-c9db58201041"]
 }, Open  ]]
 },
-WindowSize->{636, 1041},
-WindowMargins->{{642, Automatic}, {Automatic, 18}},
+WindowSize->{956, 1041},
+WindowMargins->{{Automatic, 2}, {Automatic, 18}},
 PrivateNotebookOptions->{"FileOutlineCache"->False},
 CellContext->Notebook,
 Magnification:>1.5 Inherited,
-FrontEndVersion->"11.3 for Linux x86 (64-bit) (March 6, 2018)",
+FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
 StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "FunctionPageStyles.nb", 
   CharacterEncoding -> "UTF-8"]
 ]
