@@ -1,4 +1,3 @@
-(* ::Package:: *)
 
 BeginPackage["FEMUtils`", {"NDSolve`FEM`"}];
 
@@ -34,8 +33,6 @@ BoundaryElementMeshRotation::usage="";
 BoundaryElementMeshSymmetricDifference::usage="";
 BoundaryElementMeshTranslate::usage="";
 BoundaryElementMeshUnion::usage="";
-
-
 
 Begin["`Private`"];
 

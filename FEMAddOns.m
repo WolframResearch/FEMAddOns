@@ -3,7 +3,18 @@ BeginPackage["FEMAddOns`", {
 		"NDSolve`FEM`",
 		"DistMesh`",
 		"DomainDecomposition`",
-		"FEMUtils`"
+		"FEMUtils`",
+		"ImportMesh`"
 }]
+
+
+FEMAddOns`$FEMAddOnsInstallationDirectory::usage="";
+
+Begin["`Private`"];
+
+FEMAddOns`$FEMAddOnsInstallationDirectory = DirectoryName[ $InputFileName]
+
+End[]
+
 EndPackage[]
 

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     20447,        492]
-NotebookOptionsPosition[     16094,        419]
-NotebookOutlinePosition[     16428,        434]
-CellTagsIndexPosition[     16385,        431]
+NotebookDataLength[     43993,        923]
+NotebookOptionsPosition[     38619,        831]
+NotebookOutlinePosition[     39659,        860]
+CellTagsIndexPosition[     39616,        857]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -49,7 +49,7 @@ Cell[BoxData[
  CellLabel->"In[1]:=",ExpressionUUID->"e6d9d6e8-89d0-44c6-aff8-4cc29adcf07e"],
 
 Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/\"\>"], "Output",
- CellLabel->"Out[1]=",ExpressionUUID->"9de6686f-e623-4fb0-a90d-e5b05fbecafd"]
+ CellLabel->"Out[1]=",ExpressionUUID->"c58767d8-49d6-45b9-a352-c45184535259"]
 }, Open  ]],
 
 Cell["\<\
@@ -74,7 +74,7 @@ Cell[BoxData[
 
 Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns\"\>"], \
 "Output",
- CellLabel->"Out[2]=",ExpressionUUID->"fdf2474e-f023-42ae-816e-c97d7a1eaf29"]
+ CellLabel->"Out[2]=",ExpressionUUID->"0c157605-52d1-4433-a379-53a88052291b"]
 }, Open  ]],
 
 Cell["\<\
@@ -141,7 +141,44 @@ md\"\>", ",", \
    ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/FEMAddOns.m\"\>\
 ", ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/PacletInfo.m\"\>\
 "}], "}"}]], "Output",
- CellLabel->"Out[4]=",ExpressionUUID->"4ab1d210-3207-445b-aec0-288f6f8f7a0e"]
+ CellLabel->"Out[4]=",ExpressionUUID->"d4707489-8ed3-45d0-b543-8f7b6a55d104"]
+}, Open  ]],
+
+Cell["\<\
+Copy the Resources directory from the source to the target directory:\
+\>", "Text",ExpressionUUID->"abcb0f9b-9eef-4783-a6ad-75cb8ee1eaf2"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"If", "[", " ", 
+   RowBox[{
+    RowBox[{"FileExistsQ", "[", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"target", ",", "\"\<Resources\>\""}], "}"}], "]"}], "]"}], ",", 
+    RowBox[{"DeleteDirectory", "[", 
+     RowBox[{
+      RowBox[{"FileNameJoin", "[", 
+       RowBox[{"{", 
+        RowBox[{"target", ",", "\"\<Resources\>\""}], "}"}], "]"}], ",", 
+      RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"CopyDirectory", "[", 
+  RowBox[{
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"source", ",", "\"\<Resources\>\""}], "}"}], "]"}], ",", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"target", ",", "\"\<Resources\>\""}], "}"}], "]"}]}], 
+  "]"}]}], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"0c507e3f-de59-4e8d-9675-98a8f4882557"],
+
+Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/Resources\"\
+\>"], "Output",
+ CellLabel->"Out[6]=",ExpressionUUID->"f7dd48ec-c0c1-4a5b-a794-95dc6021c5c4"]
 }, Open  ]],
 
 Cell["Make a list of sub-packages contained in FEMAddOns:", "Text",
@@ -155,12 +192,9 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
     "\"\<Applications\>\"", ",", "\"\<DistMesh\>\"", ",", 
-     "\"\<DomainDecomposition\>\"", ",", "\"\<FEMUtils\>\""}], "}"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.732944519336054*^9, 3.732944528490897*^9}, {
-  3.732945810941227*^9, 3.7329458283647547`*^9}, {3.761534604863914*^9, 
-  3.761534609778129*^9}},
- CellLabel->"In[5]:=",ExpressionUUID->"34dd5017-f01e-4dd6-a962-bc2361011cc7"],
+     "\"\<DomainDecomposition\>\"", ",", "\"\<FEMUtils\>\"", ",", 
+     "\"\<ImportMesh\>\""}], "}"}]}], ";"}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"34dd5017-f01e-4dd6-a962-bc2361011cc7"],
 
 Cell["Copy files from the source to the target directories:", "Text",
  CellChangeTimes->{{3.732946946625057*^9, 
@@ -185,14 +219,7 @@ Cell[BoxData[
      ",", 
      RowBox[{"OverwriteTarget", "\[Rule]", "True"}]}], "]"}], "&"}], "/@", 
   "subPackages"}]], "Input",
- CellChangeTimes->{{3.732942825016279*^9, 3.7329428528499403`*^9}, {
-  3.7329428879083767`*^9, 3.7329429065832167`*^9}, {3.7329429660979967`*^9, 
-  3.7329430289327507`*^9}, {3.732943505756002*^9, 3.732943526456758*^9}, {
-  3.732943563670485*^9, 3.73294356661203*^9}, {3.7329436037328653`*^9, 
-  3.732943666791896*^9}, {3.732943814758904*^9, 3.732943818002122*^9}, {
-  3.732944630830117*^9, 3.732944665970049*^9}, {3.7329448086503973`*^9, 
-  3.732944811256065*^9}, {3.732945186975317*^9, 3.732945187748178*^9}},
- CellLabel->"In[6]:=",ExpressionUUID->"ae6e48a8-5a2b-4311-8de2-9365f524f6b3"],
+ CellLabel->"In[8]:=",ExpressionUUID->"ae6e48a8-5a2b-4311-8de2-9365f524f6b3"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -203,8 +230,10 @@ COPYING\"\>",
    ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/\
 DomainDecomposition/COPYING\"\>", 
    ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/FEMUtils/\
+COPYING\"\>", 
+   ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/ImportMesh/\
 COPYING\"\>"}], "}"}]], "Output",
- CellLabel->"Out[6]=",ExpressionUUID->"0a168919-1e06-499f-b849-217cd51e0d10"]
+ CellLabel->"Out[8]=",ExpressionUUID->"1f1b4861-6182-4119-9262-bab3e9791e5d"]
 }, Open  ]],
 
 Cell["Delete possibly outdated  the source Kernel directories:", "Text",
@@ -234,12 +263,13 @@ Cell[BoxData[
        RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}]}], "]"}], "&"}],
    " ", "/@", "subPackages"}]], "Input",
  CellChangeTimes->{{3.733021973669283*^9, 3.7330220374631987`*^9}},
- CellLabel->"In[7]:=",ExpressionUUID->"581ab280-ce5e-4a6f-b242-1318928533c7"],
+ CellLabel->"In[9]:=",ExpressionUUID->"581ab280-ce5e-4a6f-b242-1318928533c7"],
 
 Cell[BoxData[
  RowBox[{"{", 
-  RowBox[{"Null", ",", "Null", ",", "Null", ",", "Null"}], "}"}]], "Output",
- CellLabel->"Out[7]=",ExpressionUUID->"f52b25a2-55fa-4976-a49d-9ee5da3c846d"]
+  RowBox[{"Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null"}], 
+  "}"}]], "Output",
+ CellLabel->"Out[9]=",ExpressionUUID->"48e0f039-3d5e-4ff9-a8c1-68163ee92db3"]
 }, Open  ]],
 
 Cell["Copy the source Kernel directories:", "Text",
@@ -270,7 +300,7 @@ Cell[BoxData[
    3.7329444242991447`*^9, 3.732944438232931*^9}, {3.732944532087133*^9, 
    3.732944600821186*^9}, 3.7329448236508102`*^9, {3.732945194827907*^9, 
    3.732945195819428*^9}, {3.732945493571245*^9, 3.732945503577833*^9}},
- CellLabel->"In[8]:=",ExpressionUUID->"0506d40f-357f-4866-815a-211a6b642222"],
+ CellLabel->"In[10]:=",ExpressionUUID->"0506d40f-357f-4866-815a-211a6b642222"],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -281,8 +311,10 @@ Kernel\"\>",
 "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/DomainDecomposition/\
 Kernel\"\>", 
    ",", "\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/FEMUtils/Kernel\
-\"\>"}], "}"}]], "Output",
- CellLabel->"Out[8]=",ExpressionUUID->"2ad7154d-2239-4bdc-a166-60c4b5b97d71"]
+\"\>", ",", \
+"\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns/ImportMesh/Kernel\"\>"}]\
+, "}"}]], "Output",
+ CellLabel->"Out[10]=",ExpressionUUID->"bec331d4-5e57-4ff3-bd31-eec04248656e"]
 }, Open  ]],
 
 Cell["\<\
@@ -296,7 +328,7 @@ build. Load the paclet manager to create the paclet\
 Cell[BoxData[
  RowBox[{"Needs", "[", "\"\<PacletManager`\>\"", "]"}]], "Input",
  CellChangeTimes->{{3.732945903851519*^9, 3.732945916339141*^9}},
- CellLabel->"In[9]:=",ExpressionUUID->"2015105e-4f16-4142-85a5-e4b84d98cab9"],
+ CellLabel->"In[11]:=",ExpressionUUID->"2015105e-4f16-4142-85a5-e4b84d98cab9"],
 
 Cell["Change into the build directory:", "Text",
  CellChangeTimes->{{3.732945987661828*^9, 
@@ -311,10 +343,10 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{"source", ",", "\"\<build\>\""}], "}"}], "]"}], "]"}]], "Input",
  CellChangeTimes->{{3.732945938938427*^9, 3.732945981731555*^9}},
- CellLabel->"In[10]:=",ExpressionUUID->"2475ae3d-1584-426e-8207-931e07e4a43b"],
+ CellLabel->"In[12]:=",ExpressionUUID->"2475ae3d-1584-426e-8207-931e07e4a43b"],
 
 Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/build\"\>"], "Output",
- CellLabel->"Out[10]=",ExpressionUUID->"15eb27c8-41e9-4f41-b69d-a769c0669440"]
+ CellLabel->"Out[12]=",ExpressionUUID->"9ed9b9df-a044-4681-ae86-d3be74eb8af5"]
 }, Open  ]],
 
 Cell["Check that this is the right directory:", "Text",
@@ -328,11 +360,11 @@ Cell[BoxData[
  RowBox[{"FileNames", "[", "]"}]], "Input",
  CellChangeTimes->{{3.732946002511554*^9, 3.732946005096506*^9}, {
    3.7329460452370453`*^9, 3.732946052858246*^9}, 3.732946545740027*^9},
- CellLabel->"In[11]:=",ExpressionUUID->"41dca234-39ce-4d5d-ad37-0ab0ff78caa6"],
+ CellLabel->"In[13]:=",ExpressionUUID->"41dca234-39ce-4d5d-ad37-0ab0ff78caa6"],
 
 Cell[BoxData[
  RowBox[{"{", "\<\"FEMAddOns\"\>", "}"}]], "Output",
- CellLabel->"Out[11]=",ExpressionUUID->"161f6ba3-b09b-43bb-8e5e-1aab04c209ec"]
+ CellLabel->"Out[13]=",ExpressionUUID->"80667d33-e781-48ad-b796-e750ee667578"]
 }, Open  ]],
 
 Cell["Create the paclet:", "Text",
@@ -345,12 +377,11 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"pacletPath", "=", 
   RowBox[{"PackPaclet", "[", "\"\<FEMAddOns\>\"", "]"}]}]], "Input",
- CellChangeTimes->{{3.732946093809887*^9, 3.732946112587557*^9}},
- CellLabel->"In[12]:=",ExpressionUUID->"0e30feb6-8e55-4fcb-a1d6-cf17d52c445b"],
+ CellLabel->"In[14]:=",ExpressionUUID->"0e30feb6-8e55-4fcb-a1d6-cf17d52c445b"],
 
-Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns-1.3.3.\
+Cell[BoxData["\<\"/home/ruebenko/wri_git/FEMAddOns/build/FEMAddOns-1.4.0.\
 paclet\"\>"], "Output",
- CellLabel->"Out[12]=",ExpressionUUID->"7fc73435-fb67-42df-95ee-8ba392bb8c46"]
+ CellLabel->"Out[14]=",ExpressionUUID->"0143bc03-c333-4d0d-95ca-d76592bf3c3f"]
 }, Open  ]],
 
 Cell["Uninstall a possibly old version", "Text",
@@ -367,7 +398,7 @@ Cell[BoxData[
    RowBox[{"PacletUninstall", "[", "\"\<FEMAddOns\>\"", "]"}]}], 
   "]"}]], "Input",
  CellChangeTimes->{{3.732946212320754*^9, 3.732946239116193*^9}},
- CellLabel->"In[13]:=",ExpressionUUID->"6b4415bd-9433-4772-b043-674aae66dfa5"],
+ CellLabel->"In[15]:=",ExpressionUUID->"6b4415bd-9433-4772-b043-674aae66dfa5"],
 
 Cell["Install the paclet", "Text",
  CellChangeTimes->{{3.732946133335067*^9, 
@@ -379,31 +410,412 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"PacletInstall", "[", "pacletPath", "]"}]], "Input",
  CellChangeTimes->{{3.732946116281004*^9, 3.732946130491419*^9}},
- CellLabel->"In[14]:=",ExpressionUUID->"8cd9ec43-43d1-4e8d-90e3-2f4ca4201023"],
+ CellLabel->"In[16]:=",ExpressionUUID->"8cd9ec43-43d1-4e8d-90e3-2f4ca4201023"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
-  "Paclet", "[", "\<\"FEMAddOns\"\>", ",", "\<\"1.3.3\"\>", ",", "<>", "]"}],
-  PacletManager`Paclet[
-  "Name" -> "FEMAddOns", "Version" -> "1.3.3", "MathematicaVersion" -> "11+", 
-   "Description" -> 
-   "Package provides additional finite element method functionality.", 
-   "Extensions" -> {{"Kernel", "Context" -> "FEMAddOns`"}, {
-     "Kernel", "Root" -> "Applications/Kernel", 
-      "Context" -> {"Applications`"}}, {
-     "Kernel", "Root" -> "DistMesh/Kernel", "Context" -> {"DistMesh`"}}, {
-     "Kernel", "Root" -> "DomainDecomposition/Kernel", 
-      "Context" -> {"DomainDecomposition`"}}, {
-     "Kernel", "Root" -> "FEMUtils/Kernel", "Context" -> {"FEMUtils`"}}, {
-     "Documentation", "Root" -> "Applications/Documentation"}, {
-     "Documentation", "Root" -> "DistMesh/Documentation"}, {
-     "Documentation", "Root" -> "DomainDecomposition/Documentation"}, {
-     "Documentation", "Root" -> "FEMUtils/Documentation", "MainPage" -> 
-      "Guides/FEMAddOns"}}, "Location" -> 
-   "/home/ruebenko/.Mathematica/Paclets/Repository/FEMAddOns-1.3.3"]]], \
-"Output",
- CellLabel->"Out[14]=",ExpressionUUID->"57f34b07-c888-49e8-abee-ea11dcdd366c"]
+   TagBox["PacletObject",
+    "SummaryHead"], "[", 
+   DynamicModuleBox[{Typeset`open$$ = False, Typeset`embedState$$ = "Ready"}, 
+    
+    TemplateBox[{
+      PaneSelectorBox[{False -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquarePlusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = True), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.0416667], {
+               FaceForm[{
+                 RGBColor[0.961, 0.961, 0.961], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{12.5454, 
+                22.5972}, {7.5464, 20.5002}, {2.5454, 18.4022}, {2.5454, 
+                12.5982}, {2.5454, 12.5972}, {2.5454, 6.7952}, {7.5454, 
+                4.6962}, {7.546, 4.6972}, {12.5454, 2.5992}, {17.5454, 
+                4.6972}, {17.5454, 4.6962}, {22.5454, 6.7952}, {22.5454, 
+                12.5972}, {22.5454, 12.5982}, {22.5454, 18.4022}}}]}, {
+               FaceForm[{
+                 RGBColor[0.898, 0.898, 0.898], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{17.125, 8.3359}, {17.125, 
+                14.0569}, {16.875, 14.0569}, {16.875, 8.3359}, {17., 
+                8.1169}, {21.952, 6.0399}, {22.049, 6.2709}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{7.125, 8.3359}, {7.125, 14.0569}, {
+                6.875, 14.0569}, {6.875, 8.3359}, {1.952, 6.2709}, {2.048, 
+                6.0399}, {7., 8.1169}}}], 
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.8745, 6.2383}, {6.9515, 4.1733}, {7.0475, 
+                3.9423}, {11.9995, 6.0193}, {16.9515, 3.9423}, {17.0475, 
+                4.1733}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{17.125, 14.1392}, {17.125, 
+                19.8602}, {16.875, 19.8602}, {16.875, 14.1392}, {17., 
+                13.9202}, {21.952, 11.8432}, {22.049, 12.0742}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{7.125, 14.1392}, {7.125, 19.8602}, {
+                6.875, 19.8602}, {6.875, 14.1392}, {1.952, 12.0742}, {2.048, 
+                11.8432}, {7., 13.9202}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.8746, 21.3633}, {11.8746, 18.3563}, {
+                11.9996, 18.3033}, {12.1246, 18.3563}, {12.1246, 21.3633}, {
+                11.9996, 21.4153}}}]}, {
+               FaceForm[{
+                 RGBColor[0.749, 0.749, 0.749], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {1, 3, 
+                 3}}}, {{{8.292, 19.8594}, {12., 21.4154}, {15.707, 
+                 19.8594}, {12., 18.3034}}, {{17.5, 19.5274}, {17.5, 
+                 20.1924}, {12., 22.5004}, {6.5, 20.1924}, {6.5, 19.5284}, {
+                 12., 17.2194}, {12., 17.2194}, {15.7, 18.7724}, {17.5, 
+                 19.5274}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.5, 8.5156}, {11.5, 6.4876}, {11.5, 
+                5.4026}, {12.5, 5.8226}, {12.5, 8.5156}, {12., 8.3056}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}}}, {{{21.5, 6.4873}, {17.5, 4.8083}, {17.5, 
+                 9.5283}, {21.5, 11.2073}}, {{21.5, 12.7113}, {21.5, 
+                 12.2913}, {17., 10.4033}, {16.5, 10.6133}, {16.5, 10.1943}, {
+                 15.707, 9.8613}, {16.5, 9.5283}, {16.5, 4.8083}, {16.5, 
+                 4.8093}, {16.5, 4.3903}, {15.707, 4.0573}, {17., 3.5143}, {
+                 22.5, 5.8223}, {22.5, 12.2913}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}}}, {{{6.5, 4.8086}, {2.5, 6.4876}, {2.5, 
+                 11.2066}, {6.5, 9.5286}}, {{7.5, 9.1096}, {7.5, 9.1096}, {
+                 7.5, 9.5286}, {8.292, 9.8616}, {7.5, 10.1936}, {7.5, 
+                 10.6136}, {7., 10.4036}, {2.5, 12.2906}, {2.5, 12.7106}, {
+                 1.5, 12.2916}, {1.5, 5.8226}, {7., 3.5146}, {8.293, 
+                 4.0576}, {7.5, 4.3906}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{3.2925, 17.7622}, {7.0005, 
+                 19.3182}, {10.7075, 17.7622}, {7.0005, 16.2062}}, {{6.5005, 
+                 10.6122}, {2.5005, 12.2912}, {2.5005, 17.0102}, {6.5005, 
+                 15.3322}}, {{7.5005, 10.1932}, {7.5005, 10.6122}, {7.5005, 
+                 15.3322}, {12.0005, 17.2202}, {12.5005, 17.0102}, {12.5005, 
+                 18.0952}, {7.0005, 20.4032}, {1.5005, 18.0952}, {1.5005, 
+                 11.6262}, {7.0005, 9.3182}, {8.2935, 9.8612}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{21.5, 12.291}, {17.5, 10.612}, {
+                 17.5, 15.332}, {21.5, 17.01}}, {{13.293, 17.762}, {17., 
+                 19.318}, {20.708, 17.762}, {17., 16.207}}, {{17., 20.403}, {
+                 11.5, 18.095}, {11.5, 17.01}, {12., 17.22}, {16.5, 15.332}, {
+                 16.5, 10.612}, {16.5, 10.194}, {15.706, 9.861}, {17., 
+                 9.318}, {22.5, 11.626}, {22.5, 18.095}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{16.4995, 4.3906}, {12.4995, 
+                 2.7116}, {12.4995, 7.4316}, {16.4995, 9.1096}}, {{11.4995, 
+                 2.7116}, {7.4995, 4.3906}, {7.4995, 9.1096}, {11.4995, 
+                 7.4316}}, {{16.4995, 10.6136}, {16.4995, 10.1946}, {11.9995, 
+                 8.3056}, {8.2915, 9.8616}, {7.4995, 10.1936}, {7.4995, 
+                 10.6146}, {6.4995, 10.1946}, {6.4995, 3.7256}, {11.9995, 
+                 1.4176}, {17.4995, 3.7256}, {17.4995, 10.1946}}}]}, {
+               FaceForm[{
+                 RGBColor[0.965, 0.765, 0.749], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{12., 17.6616}, {16.945, 15.5856}, {16.945, 
+                9.9376}, {12., 7.8636}, {7.055, 9.9376}, {7.055, 
+                15.5856}}}]}, {
+               FaceForm[{
+                 RGBColor[0.91, 0.655, 0.635], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{12.125, 
+                17.7627}, {11.875, 17.7627}, {11.875, 12.0407}, {6.952, 
+                9.9757}, {7.048, 9.7447}, {12., 11.8227}, {16.952, 9.7447}, {
+                17.048, 9.9757}, {12.125, 12.0407}}}]}, {
+               FaceForm[{
+                 RGBColor[0.867, 0.067, 0.], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}}}, {{{12.5, 8.5146}, {12.5, 13.2336}, {16.5, 14.9116}, {
+                 16.5, 10.1926}}, {{7.5, 14.9116}, {11.5, 13.2336}, {11.5, 
+                 8.5146}, {7.5, 10.1926}}, {{15.708, 15.6636}, {12., 
+                 14.1086}, {8.292, 15.6636}, {12., 17.2206}}, {{12., 
+                 18.3046}, {6.5, 15.9956}, {6.5, 9.5286}, {12., 7.2206}, {
+                 17.5, 9.5286}, {17.5, 15.9956}}}]}}, AspectRatio -> 
+             Automatic, ImageSize -> {24., 24.}, 
+             PlotRange -> {{0., 24.}, {0., 24.}}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"FEMAddOns\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Version: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"1.4.0\"", "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}], True -> GridBox[{{
+            PaneBox[
+             ButtonBox[
+              DynamicBox[
+               FEPrivate`FrontEndResource[
+               "FEBitmaps", "SquareMinusIconMedium"]], 
+              ButtonFunction :> (Typeset`open$$ = False), Appearance -> None, 
+              Evaluator -> Automatic, Method -> "Preemptive"], 
+             Alignment -> {Center, Center}, ImageSize -> 
+             Dynamic[{
+               Automatic, 3.5 CurrentValue["FontCapHeight"]/
+                AbsoluteCurrentValue[Magnification]}]], 
+            GraphicsBox[{
+              Thickness[0.0416667], {
+               FaceForm[{
+                 RGBColor[0.961, 0.961, 0.961], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{12.5454, 
+                22.5972}, {7.5464, 20.5002}, {2.5454, 18.4022}, {2.5454, 
+                12.5982}, {2.5454, 12.5972}, {2.5454, 6.7952}, {7.5454, 
+                4.6962}, {7.546, 4.6972}, {12.5454, 2.5992}, {17.5454, 
+                4.6972}, {17.5454, 4.6962}, {22.5454, 6.7952}, {22.5454, 
+                12.5972}, {22.5454, 12.5982}, {22.5454, 18.4022}}}]}, {
+               FaceForm[{
+                 RGBColor[0.898, 0.898, 0.898], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{17.125, 8.3359}, {17.125, 
+                14.0569}, {16.875, 14.0569}, {16.875, 8.3359}, {17., 
+                8.1169}, {21.952, 6.0399}, {22.049, 6.2709}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{7.125, 8.3359}, {7.125, 14.0569}, {
+                6.875, 14.0569}, {6.875, 8.3359}, {1.952, 6.2709}, {2.048, 
+                6.0399}, {7., 8.1169}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.8745, 6.2383}, {6.9515, 4.1733}, {7.0475, 
+                3.9423}, {11.9995, 6.0193}, {16.9515, 3.9423}, {17.0475, 
+                4.1733}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{17.125, 14.1392}, {17.125, 
+                19.8602}, {16.875, 19.8602}, {16.875, 14.1392}, {17., 
+                13.9202}, {21.952, 11.8432}, {22.049, 12.0742}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}}}, {{{7.125, 14.1392}, {7.125, 19.8602}, {
+                6.875, 19.8602}, {6.875, 14.1392}, {1.952, 12.0742}, {2.048, 
+                11.8432}, {7., 13.9202}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.8746, 21.3633}, {11.8746, 18.3563}, {
+                11.9996, 18.3033}, {12.1246, 18.3563}, {12.1246, 21.3633}, {
+                11.9996, 21.4153}}}]}, {
+               FaceForm[{
+                 RGBColor[0.749, 0.749, 0.749], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {1, 3, 
+                 3}}}, {{{8.292, 19.8594}, {12., 21.4154}, {15.707, 
+                 19.8594}, {12., 18.3034}}, {{17.5, 19.5274}, {17.5, 
+                 20.1924}, {12., 22.5004}, {6.5, 20.1924}, {6.5, 19.5284}, {
+                 12., 17.2194}, {12., 17.2194}, {15.7, 18.7724}, {17.5, 
+                 19.5274}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{11.5, 8.5156}, {11.5, 6.4876}, {11.5, 
+                5.4026}, {12.5, 5.8226}, {12.5, 8.5156}, {12., 8.3056}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}}}, {{{21.5, 6.4873}, {17.5, 4.8083}, {17.5, 
+                 9.5283}, {21.5, 11.2073}}, {{21.5, 12.7113}, {21.5, 
+                 12.2913}, {17., 10.4033}, {16.5, 10.6133}, {16.5, 10.1943}, {
+                 15.707, 9.8613}, {16.5, 9.5283}, {16.5, 4.8083}, {16.5, 
+                 4.8093}, {16.5, 4.3903}, {15.707, 4.0573}, {17., 3.5143}, {
+                 22.5, 5.8223}, {22.5, 12.2913}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}}}, {{{6.5, 4.8086}, {2.5, 6.4876}, {2.5, 
+                 11.2066}, {6.5, 9.5286}}, {{7.5, 9.1096}, {7.5, 9.1096}, {
+                 7.5, 9.5286}, {8.292, 9.8616}, {7.5, 10.1936}, {7.5, 
+                 10.6136}, {7., 10.4036}, {2.5, 12.2906}, {2.5, 12.7106}, {
+                 1.5, 12.2916}, {1.5, 5.8226}, {7., 3.5146}, {8.293, 
+                 4.0576}, {7.5, 4.3906}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{3.2925, 17.7622}, {7.0005, 
+                 19.3182}, {10.7075, 17.7622}, {7.0005, 16.2062}}, {{6.5005, 
+                 10.6122}, {2.5005, 12.2912}, {2.5005, 17.0102}, {6.5005, 
+                 15.3322}}, {{7.5005, 10.1932}, {7.5005, 10.6122}, {7.5005, 
+                 15.3322}, {12.0005, 17.2202}, {12.5005, 17.0102}, {12.5005, 
+                 18.0952}, {7.0005, 20.4032}, {1.5005, 18.0952}, {1.5005, 
+                 11.6262}, {7.0005, 9.3182}, {8.2935, 9.8612}}}], 
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{21.5, 12.291}, {17.5, 10.612}, {
+                 17.5, 15.332}, {21.5, 17.01}}, {{13.293, 17.762}, {17., 
+                 19.318}, {20.708, 17.762}, {17., 16.207}}, {{17., 20.403}, {
+                 11.5, 18.095}, {11.5, 17.01}, {12., 17.22}, {16.5, 15.332}, {
+                 16.5, 10.612}, {16.5, 10.194}, {15.706, 9.861}, {17., 
+                 9.318}, {22.5, 11.626}, {22.5, 18.095}}}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                 0, 1, 0}, {0, 1, 0}}}, {{{16.4995, 4.3906}, {12.4995, 
+                 2.7116}, {12.4995, 7.4316}, {16.4995, 9.1096}}, {{11.4995, 
+                 2.7116}, {7.4995, 4.3906}, {7.4995, 9.1096}, {11.4995, 
+                 7.4316}}, {{16.4995, 10.6136}, {16.4995, 10.1946}, {11.9995, 
+                 8.3056}, {8.2915, 9.8616}, {7.4995, 10.1936}, {7.4995, 
+                 10.6146}, {6.4995, 10.1946}, {6.4995, 3.7256}, {11.9995, 
+                 1.4176}, {17.4995, 3.7256}, {17.4995, 10.1946}}}]}, {
+               FaceForm[{
+                 RGBColor[0.965, 0.765, 0.749], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}}}, {{{12., 17.6616}, {16.945, 15.5856}, {16.945, 
+                9.9376}, {12., 7.8636}, {7.055, 9.9376}, {7.055, 
+                15.5856}}}]}, {
+               FaceForm[{
+                 RGBColor[0.91, 0.655, 0.635], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {
+                0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}}}, {{{12.125, 
+                17.7627}, {11.875, 17.7627}, {11.875, 12.0407}, {6.952, 
+                9.9757}, {7.048, 9.7447}, {12., 11.8227}, {16.952, 9.7447}, {
+                17.048, 9.9757}, {12.125, 12.0407}}}]}, {
+               FaceForm[{
+                 RGBColor[0.867, 0.067, 0.], 
+                 Opacity[1.]}], 
+               
+               FilledCurveBox[{{{0, 2, 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 
+                 0}, {0, 1, 0}, {0, 1, 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 
+                 0}}, {{0, 2, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 0}, {0, 1, 
+                 0}}}, {{{12.5, 8.5146}, {12.5, 13.2336}, {16.5, 14.9116}, {
+                 16.5, 10.1926}}, {{7.5, 14.9116}, {11.5, 13.2336}, {11.5, 
+                 8.5146}, {7.5, 10.1926}}, {{15.708, 15.6636}, {12., 
+                 14.1086}, {8.292, 15.6636}, {12., 17.2206}}, {{12., 
+                 18.3046}, {6.5, 15.9956}, {6.5, 9.5286}, {12., 7.2206}, {
+                 17.5, 9.5286}, {17.5, 15.9956}}}]}}, AspectRatio -> 
+             Automatic, ImageSize -> {24., 24.}, 
+             PlotRange -> {{0., 24.}, {0., 24.}}], 
+            GridBox[{{
+               RowBox[{
+                 TagBox["\"Name: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"FEMAddOns\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Version: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox["\"1.4.0\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Location: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                 "\"/home/ruebenko/.Mathematica/Paclets/Repository/FEMAddOns-\
+1.4.0\"", "SummaryItem"]}]}, {
+               RowBox[{
+                 TagBox["\"Description: \"", "SummaryItemAnnotation"], 
+                 "\[InvisibleSpace]", 
+                 TagBox[
+                  TagBox[
+                  "\"Package provides additional finite element method \
+functionality.\"", Short], "SummaryItem"]}]}}, 
+             GridBoxAlignment -> {
+              "Columns" -> {{Left}}, "Rows" -> {{Automatic}}}, AutoDelete -> 
+             False, GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{2}}, "Rows" -> {{Automatic}}},
+              BaseStyle -> {
+              ShowStringCharacters -> False, NumberMarks -> False, 
+               PrintPrecision -> 3, ShowSyntaxStyles -> False}]}}, 
+          GridBoxAlignment -> {"Rows" -> {{Top}}}, AutoDelete -> False, 
+          GridBoxItemSize -> {
+           "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+          BaselinePosition -> {1, 1}]}, 
+       Dynamic[Typeset`open$$], ImageSize -> Automatic]},
+     "SummaryPanel"],
+    DynamicModuleValues:>{}], "]"}],
+  PacletObject[
+   Association[
+   "Name" -> "FEMAddOns", "Version" -> "1.4.0", "MathematicaVersion" -> "11+",
+     "Description" -> 
+    "Package provides additional finite element method functionality.", 
+    "Extensions" -> {{"Kernel", "Context" -> "FEMAddOns`"}, {
+      "Kernel", "Root" -> "Applications/Kernel", 
+       "Context" -> {"Applications`"}}, {
+      "Kernel", "Root" -> "DistMesh/Kernel", "Context" -> {"DistMesh`"}}, {
+      "Kernel", "Root" -> "DomainDecomposition/Kernel", 
+       "Context" -> {"DomainDecomposition`"}}, {
+      "Kernel", "Root" -> "FEMUtils/Kernel", "Context" -> {"FEMUtils`"}}, {
+      "Kernel", "Root" -> "ImportMesh/Kernel", 
+       "Context" -> {"ImportMesh`"}}, {
+      "Documentation", "Root" -> "Applications/Documentation"}, {
+      "Documentation", "Root" -> "DistMesh/Documentation"}, {
+      "Documentation", "Root" -> "DomainDecomposition/Documentation"}, {
+      "Documentation", "Root" -> "FEMUtils/Documentation", "MainPage" -> 
+       "Guides/FEMAddOns"}, {
+      "Documentation", "Root" -> "ImportMesh/Documentation"}}, "Location" -> 
+    "/home/ruebenko/.Mathematica/Paclets/Repository/FEMAddOns-1.4.0"]],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->False]], "Output",
+ CellLabel->"Out[16]=",ExpressionUUID->"9cd446e4-b504-406b-b267-676d6d83ac20"]
 }, Open  ]],
 
 Cell["Rebuild the paclet data:", "Text",
@@ -415,12 +827,26 @@ Cell[BoxData[
  RowBox[{"RebuildPacletData", "[", "]"}]], "Input",
  CellChangeTimes->{{3.732946265347781*^9, 3.732946267713866*^9}, 
    3.732946345253234*^9},
- CellLabel->"In[15]:=",ExpressionUUID->"913c98c4-e3c3-4c02-825f-ed3c31b404e0"]
+ CellLabel->"In[17]:=",ExpressionUUID->"913c98c4-e3c3-4c02-825f-ed3c31b404e0"]
 },
-WindowSize->{956, 1041},
-WindowMargins->{{Automatic, 2}, {Automatic, 18}},
-FrontEndVersion->"12.0 for Linux x86 (64-bit) (April 8, 2019)",
-StyleDefinitions->"Default.nb"
+WindowSize->{925.5, 780.75},
+WindowMargins->{{Automatic, 1.5}, {Automatic, 13.5}},
+TaggingRules->{
+ "DocuToolsSettingsInternal" -> {
+   "$ApplicationName" -> "Mathematica", "$LinkBase" -> "Mathematica", 
+    "$ApplicationDirectory" -> "/home/ruebenko/wri/Mathematica/", 
+    "$DocumentationDirectory" -> 
+    "/home/ruebenko/wri/Mathematica/Documentation/English/", 
+    "$UseNewPageDialog" -> "", "$PacletVersion" -> "0.10.2222"}, 
+  "DocuToolsSettings" -> {
+   "$ApplicationName" -> "test", "$LinkBase" -> "test", 
+    "$DocumentationDirectory" -> 
+    "/usr/local/Wolfram/Mathematica/12.1/Documentation/English/", 
+    "$ApplicationDirectory" -> "/home/ruebenko/eclipse-workspace/test/test"}, 
+  "TryRealOnly" -> False},
+FrontEndVersion->"12.1 for Linux x86 (64-bit) (March 18, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"733771f1-62fc-4aad-88c5-5a1258548fe0"
 ]
 (* End of Notebook Content *)
 
@@ -433,67 +859,72 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 472, 9, 84, "Text",ExpressionUUID->"c1e1306f-a32f-4064-9864-79edbe57bcec"],
-Cell[1033, 31, 334, 7, 36, "Text",ExpressionUUID->"cf0fec40-e208-4e8f-a24c-c7ca1cb1a60e"],
+Cell[558, 20, 472, 9, 81, "Text",ExpressionUUID->"c1e1306f-a32f-4064-9864-79edbe57bcec"],
+Cell[1033, 31, 334, 7, 35, "Text",ExpressionUUID->"cf0fec40-e208-4e8f-a24c-c7ca1cb1a60e"],
 Cell[CellGroupData[{
-Cell[1392, 42, 385, 6, 31, "Input",ExpressionUUID->"e6d9d6e8-89d0-44c6-aff8-4cc29adcf07e"],
-Cell[1780, 50, 146, 1, 35, "Output",ExpressionUUID->"9de6686f-e623-4fb0-a90d-e5b05fbecafd"]
+Cell[1392, 42, 385, 6, 29, "Input",ExpressionUUID->"e6d9d6e8-89d0-44c6-aff8-4cc29adcf07e"],
+Cell[1780, 50, 146, 1, 33, "Output",ExpressionUUID->"c58767d8-49d6-45b9-a352-c45184535259"]
 }, Open  ]],
-Cell[1941, 54, 267, 6, 36, "Text",ExpressionUUID->"f0bb7bad-7d54-4e16-b6be-3ffafe4e8a35"],
+Cell[1941, 54, 267, 6, 35, "Text",ExpressionUUID->"f0bb7bad-7d54-4e16-b6be-3ffafe4e8a35"],
 Cell[CellGroupData[{
-Cell[2233, 64, 384, 8, 31, "Input",ExpressionUUID->"edf34cbe-cf33-4075-b740-4b9a01a7b667"],
-Cell[2620, 74, 163, 2, 35, "Output",ExpressionUUID->"fdf2474e-f023-42ae-816e-c97d7a1eaf29"]
+Cell[2233, 64, 384, 8, 29, "Input",ExpressionUUID->"edf34cbe-cf33-4075-b740-4b9a01a7b667"],
+Cell[2620, 74, 163, 2, 33, "Output",ExpressionUUID->"0c157605-52d1-4433-a379-53a88052291b"]
 }, Open  ]],
-Cell[2798, 79, 319, 6, 36, "Text",ExpressionUUID->"c384751e-1a04-4619-ad6e-6aaa5e55c243"],
-Cell[3120, 87, 406, 10, 55, "Input",ExpressionUUID->"2997d808-12a7-4fcb-94b5-08abedc0a2a8"],
-Cell[3529, 99, 247, 4, 36, "Text",ExpressionUUID->"b6dce78b-d0c6-4580-ac60-4cd8c55cde20"],
+Cell[2798, 79, 319, 6, 35, "Text",ExpressionUUID->"c384751e-1a04-4619-ad6e-6aaa5e55c243"],
+Cell[3120, 87, 406, 10, 29, "Input",ExpressionUUID->"2997d808-12a7-4fcb-94b5-08abedc0a2a8"],
+Cell[3529, 99, 247, 4, 35, "Text",ExpressionUUID->"b6dce78b-d0c6-4580-ac60-4cd8c55cde20"],
 Cell[CellGroupData[{
-Cell[3801, 107, 1195, 25, 55, "Input",ExpressionUUID->"48662ec9-13ea-4071-8c8c-b746c3c5de7d"],
-Cell[4999, 134, 534, 9, 128, "Output",ExpressionUUID->"4ab1d210-3207-445b-aec0-288f6f8f7a0e"]
+Cell[3801, 107, 1195, 25, 51, "Input",ExpressionUUID->"48662ec9-13ea-4071-8c8c-b746c3c5de7d"],
+Cell[4999, 134, 534, 9, 117, "Output",ExpressionUUID->"d4707489-8ed3-45d0-b543-8f7b6a55d104"]
 }, Open  ]],
-Cell[5548, 146, 193, 3, 36, "Text",ExpressionUUID->"d98a1c65-67e4-4329-bf4e-745281784f00"],
-Cell[5744, 151, 479, 11, 31, "Input",ExpressionUUID->"34dd5017-f01e-4dd6-a962-bc2361011cc7"],
-Cell[6226, 164, 195, 3, 36, "Text",ExpressionUUID->"870b5a1f-6bee-4205-9ffa-428dc0efbc3f"],
+Cell[5548, 146, 148, 2, 35, "Text",ExpressionUUID->"abcb0f9b-9eef-4783-a6ad-75cb8ee1eaf2"],
 Cell[CellGroupData[{
-Cell[6446, 171, 1090, 23, 55, "Input",ExpressionUUID->"ae6e48a8-5a2b-4311-8de2-9365f524f6b3"],
-Cell[7539, 196, 494, 10, 105, "Output",ExpressionUUID->"0a168919-1e06-499f-b849-217cd51e0d10"]
+Cell[5721, 152, 924, 24, 92, "Input",ExpressionUUID->"0c507e3f-de59-4e8d-9675-98a8f4882557"],
+Cell[6648, 178, 173, 2, 33, "Output",ExpressionUUID->"f7dd48ec-c0c1-4a5b-a794-95dc6021c5c4"]
 }, Open  ]],
-Cell[8048, 209, 297, 4, 36, "Text",ExpressionUUID->"f6e89281-5749-415c-a20f-14daf82e5ec6"],
+Cell[6836, 183, 193, 3, 35, "Text",ExpressionUUID->"d98a1c65-67e4-4329-bf4e-745281784f00"],
+Cell[7032, 188, 343, 8, 29, "Input",ExpressionUUID->"34dd5017-f01e-4dd6-a962-bc2361011cc7"],
+Cell[7378, 198, 195, 3, 35, "Text",ExpressionUUID->"870b5a1f-6bee-4205-9ffa-428dc0efbc3f"],
 Cell[CellGroupData[{
-Cell[8370, 217, 729, 19, 78, "Input",ExpressionUUID->"581ab280-ce5e-4a6f-b242-1318928533c7"],
-Cell[9102, 238, 183, 3, 35, "Output",ExpressionUUID->"f52b25a2-55fa-4976-a49d-9ee5da3c846d"]
+Cell[7598, 205, 579, 16, 51, "Input",ExpressionUUID->"ae6e48a8-5a2b-4311-8de2-9365f524f6b3"],
+Cell[8180, 223, 584, 12, 117, "Output",ExpressionUUID->"1f1b4861-6182-4119-9262-bab3e9791e5d"]
 }, Open  ]],
-Cell[9300, 244, 228, 4, 36, "Text",ExpressionUUID->"c0bc0984-7a16-4b12-961c-2c9db2708498"],
+Cell[8779, 238, 297, 4, 35, "Text",ExpressionUUID->"f6e89281-5749-415c-a20f-14daf82e5ec6"],
 Cell[CellGroupData[{
-Cell[9553, 252, 955, 20, 55, "Input",ExpressionUUID->"0506d40f-357f-4866-815a-211a6b642222"],
-Cell[10511, 274, 488, 10, 105, "Output",ExpressionUUID->"2ad7154d-2239-4bdc-a166-60c4b5b97d71"]
+Cell[9101, 246, 729, 19, 51, "Input",ExpressionUUID->"581ab280-ce5e-4a6f-b242-1318928533c7"],
+Cell[9833, 267, 199, 4, 33, "Output",ExpressionUUID->"48e0f039-3d5e-4ff9-a8c1-68163ee92db3"]
 }, Open  ]],
-Cell[11014, 287, 281, 6, 36, "Text",ExpressionUUID->"0775e121-04ac-4d20-9fdb-2a629d651465"],
-Cell[11298, 295, 223, 3, 31, "Input",ExpressionUUID->"2015105e-4f16-4142-85a5-e4b84d98cab9"],
-Cell[11524, 300, 174, 3, 36, "Text",ExpressionUUID->"693adfef-5f95-4f90-9d42-062e1a1a94ca"],
+Cell[10047, 274, 228, 4, 35, "Text",ExpressionUUID->"c0bc0984-7a16-4b12-961c-2c9db2708498"],
 Cell[CellGroupData[{
-Cell[11723, 307, 315, 6, 31, "Input",ExpressionUUID->"2475ae3d-1584-426e-8207-931e07e4a43b"],
-Cell[12041, 315, 152, 1, 35, "Output",ExpressionUUID->"15eb27c8-41e9-4f41-b69d-a769c0669440"]
+Cell[10300, 282, 956, 20, 51, "Input",ExpressionUUID->"0506d40f-357f-4866-815a-211a6b642222"],
+Cell[11259, 304, 576, 12, 117, "Output",ExpressionUUID->"bec331d4-5e57-4ff3-bd31-eec04248656e"]
 }, Open  ]],
-Cell[12208, 319, 181, 3, 36, "Text",ExpressionUUID->"02c77753-46be-4d5f-ba89-28cfaaca1ced"],
+Cell[11850, 319, 281, 6, 35, "Text",ExpressionUUID->"0775e121-04ac-4d20-9fdb-2a629d651465"],
+Cell[12134, 327, 224, 3, 29, "Input",ExpressionUUID->"2015105e-4f16-4142-85a5-e4b84d98cab9"],
+Cell[12361, 332, 174, 3, 35, "Text",ExpressionUUID->"693adfef-5f95-4f90-9d42-062e1a1a94ca"],
 Cell[CellGroupData[{
-Cell[12414, 326, 276, 4, 31, "Input",ExpressionUUID->"41dca234-39ce-4d5d-ad37-0ab0ff78caa6"],
-Cell[12693, 332, 145, 2, 35, "Output",ExpressionUUID->"161f6ba3-b09b-43bb-8e5e-1aab04c209ec"]
+Cell[12560, 339, 315, 6, 29, "Input",ExpressionUUID->"2475ae3d-1584-426e-8207-931e07e4a43b"],
+Cell[12878, 347, 152, 1, 33, "Output",ExpressionUUID->"9ed9b9df-a044-4681-ae86-d3be74eb8af5"]
 }, Open  ]],
-Cell[12853, 337, 160, 3, 36, "Text",ExpressionUUID->"63039a9e-dcc1-44ec-8367-875fa4aecf66"],
+Cell[13045, 351, 181, 3, 35, "Text",ExpressionUUID->"02c77753-46be-4d5f-ba89-28cfaaca1ced"],
 Cell[CellGroupData[{
-Cell[13038, 344, 256, 4, 31, "Input",ExpressionUUID->"0e30feb6-8e55-4fcb-a1d6-cf17d52c445b"],
-Cell[13297, 350, 177, 2, 35, "Output",ExpressionUUID->"7fc73435-fb67-42df-95ee-8ba392bb8c46"]
+Cell[13251, 358, 276, 4, 29, "Input",ExpressionUUID->"41dca234-39ce-4d5d-ad37-0ab0ff78caa6"],
+Cell[13530, 364, 145, 2, 33, "Output",ExpressionUUID->"80667d33-e781-48ad-b796-e750ee667578"]
 }, Open  ]],
-Cell[13489, 355, 174, 3, 36, "Text",ExpressionUUID->"d7d14b12-42bf-4512-86a5-bb7f2c908c59"],
-Cell[13666, 360, 391, 9, 31, "Input",ExpressionUUID->"6b4415bd-9433-4772-b043-674aae66dfa5"],
-Cell[14060, 371, 160, 3, 36, "Text",ExpressionUUID->"a8d1bb9a-37e9-4d0b-8af9-ddf748469f63"],
+Cell[13690, 369, 160, 3, 35, "Text",ExpressionUUID->"63039a9e-dcc1-44ec-8367-875fa4aecf66"],
 Cell[CellGroupData[{
-Cell[14245, 378, 220, 3, 31, "Input",ExpressionUUID->"8cd9ec43-43d1-4e8d-90e3-2f4ca4201023"],
-Cell[14468, 383, 1200, 22, 35, "Output",ExpressionUUID->"57f34b07-c888-49e8-abee-ea11dcdd366c"]
+Cell[13875, 376, 190, 3, 29, "Input",ExpressionUUID->"0e30feb6-8e55-4fcb-a1d6-cf17d52c445b"],
+Cell[14068, 381, 177, 2, 33, "Output",ExpressionUUID->"0143bc03-c333-4d0d-95ca-d76592bf3c3f"]
 }, Open  ]],
-Cell[15683, 408, 168, 3, 36, "Text",ExpressionUUID->"fde6f728-f92e-40b7-9936-b8e90885b501"],
-Cell[15854, 413, 236, 4, 31, "Input",ExpressionUUID->"913c98c4-e3c3-4c02-825f-ed3c31b404e0"]
+Cell[14260, 386, 174, 3, 35, "Text",ExpressionUUID->"d7d14b12-42bf-4512-86a5-bb7f2c908c59"],
+Cell[14437, 391, 391, 9, 29, "Input",ExpressionUUID->"6b4415bd-9433-4772-b043-674aae66dfa5"],
+Cell[14831, 402, 160, 3, 35, "Text",ExpressionUUID->"a8d1bb9a-37e9-4d0b-8af9-ddf748469f63"],
+Cell[CellGroupData[{
+Cell[15016, 409, 220, 3, 29, "Input",ExpressionUUID->"8cd9ec43-43d1-4e8d-90e3-2f4ca4201023"],
+Cell[15239, 414, 22954, 403, 62, "Output",ExpressionUUID->"9cd446e4-b504-406b-b267-676d6d83ac20"]
+}, Open  ]],
+Cell[38208, 820, 168, 3, 35, "Text",ExpressionUUID->"fde6f728-f92e-40b7-9936-b8e90885b501"],
+Cell[38379, 825, 236, 4, 29, "Input",ExpressionUUID->"913c98c4-e3c3-4c02-825f-ed3c31b404e0"]
 }
 ]
 *)

@@ -2,7 +2,7 @@
 
 Paclet[
     Name -> "FEMAddOns",
-    Version -> "1.3.3",
+    Version -> "1.4.0",
     MathematicaVersion -> "11+",
     Description -> "Package provides additional finite element method functionality.",
     Extensions -> 
@@ -20,10 +20,15 @@ Paclet[
             {"Kernel", Root -> "FEMUtils/Kernel", Context -> 
                 {"FEMUtils`"}
             }, 
+            {"Kernel", Root -> "ImportMesh/Kernel", Context -> 
+                {"ImportMesh`"}
+            }, 
             {"Documentation", Root -> "Applications/Documentation"}, 
             {"Documentation", Root -> "DistMesh/Documentation"}, 
             {"Documentation", Root -> "DomainDecomposition/Documentation"}, 
-            {"Documentation", Root -> "FEMUtils/Documentation", MainPage -> "Guides/FEMAddOns"}
+            {"Documentation", Root -> "FEMUtils/Documentation", MainPage -> "Guides/FEMAddOns"},
+            {"Documentation", Root -> "ImportMesh/Documentation"}
+
         }
 ]
 

@@ -139,16 +139,25 @@ or set Mathematica.DocumentationBuild.createHTML.setting to Mathematica.Document
             <param name="docOutputDir" value="DistMesh/Documentation"/>
         </antcall>
     </target>
+
     <target name="DomainDecomposition">
         <antcall target="docbuild">
             <param name="docInputDir" value="FEMAddOns/DomainDecomposition/Documentation"/>
             <param name="docOutputDir" value="DomainDecomposition/Documentation"/>
         </antcall>
+
     </target>
     <target name="FEMUtils">
         <antcall target="docbuild">
             <param name="docInputDir" value="FEMAddOns/FEMUtils/Documentation"/>
             <param name="docOutputDir" value="FEMUtils/Documentation"/>
+        </antcall>
+
+    </target>
+    <target name="ImportMesh">
+        <antcall target="docbuild">
+            <param name="docInputDir" value="FEMAddOns/ImportMesh/Documentation"/>
+            <param name="docOutputDir" value="ImportMesh/Documentation"/>
         </antcall>
     </target>
 
