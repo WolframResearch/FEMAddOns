@@ -59,6 +59,14 @@ Use the `DistMesh` mesh generator to create smooth meshes:
 ![DistMesh](Images/distMesh.png)
 
 
+ With `ImportMesh` load meshes from Abaqus, Comsol, Elfen and Gmsh  
+
+	mesh = ImportMesh[ "filePath", "mesh.mphtxt"];
+	mesh["Wireframe"]
+
+![screenshot](https://imgur.com/aq92uqA.gif "Geometry source: https://grabcad.com/    library/goose-2")
+
+
 Use `DomainDecomposition` to solve stationary PDEs on a cluster:
 
 	kernels = LaunchKernels[24];
@@ -66,6 +74,7 @@ Use `DomainDecomposition` to solve stationary PDEs on a cluster:
 	  DirichletCondition[u[x, y] == 0, 
 	   x == 0 || x == 5 || y == 0 || y == 1]}, u, Element[{x, y}, 
 	  Rectangle[{0, 0}, {5, 1}]], "Kernels" -> kernels]
+
 
 ### More...
 
