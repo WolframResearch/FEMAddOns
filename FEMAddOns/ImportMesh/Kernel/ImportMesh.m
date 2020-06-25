@@ -397,14 +397,45 @@ getElementSet[list_,pos_Integer]:=If[
 ];
 
 
+getElementMarkers[list_, pos_Integer, lookup_] :=
+Module[
+	{default, materialName, marker, elIDs},
+	default = {{},0};
+	If[ Length[ list[[pos]]] < 2, Return[default, Module]];
+	materialName = StringDelete[list[[pos, 2]], "ELSET="];
+	marker = lookup[materialName];
+	If[ MissingQ[marker],
+		default	
+	,
+		elIDs = ToExpression[Join @@ takeLines[list, pos]];
+		{elIDs, marker}
+	]
+]
+
+
+getMarkerLookup[list_, solidSectionPos_] :=
+Module[
+	{matString, matName},
+
+	matString = (list[[#]] & /@ solidSectionPos)[[All, {2, -1}]];
+	matString = Select[(StringSplit[#, {"="}] & /@ matString),
+		(#[[1, 1]] == "ELSET" && #[[2, 1]] == "MATERIAL") &];
+
+	matName = matString[[All, 2, 2]];
+
+	Association[ Thread[Rule[matString[[All, 1, 2]], matName /.
+		MapThread[Rule, {#, Range[Length[#]]} &[Union[matName]]]]]]
+]
+
 getElementConnectivity[list_,pos_]:=ToExpression[Join@@takeLines[list,pos]];
 
 
 getElements[list_]:=Module[
 	{startLines,elSetStrings,types,flattenedConnectivity,markers},
 	startLines=getPosition[list,"*ELEMENT"];
-	
+
 	elSetStrings=getElementSet[list,#]&/@startLines;
+
 	types=getElementType[list,#]&/@startLines;	
 	flattenedConnectivity=getElementConnectivity[list,#]&/@startLines;
 	
@@ -412,9 +443,31 @@ getElements[list_]:=Module[
 	elements get marker value 0. This is save in global symbol $markerNumbering for further use.
 	This is a hack, and could be solved more elegantly. *)
 	$markerNumbering=MapIndexed[#1->First[#2]&,Union@DeleteMissing[elSetStrings]];
+
 	markers=elSetStrings/.Prepend[$markerNumbering,Missing[]->0];
-	
-	MapThread[ processElements[#1,#2,#3]&, {types,flattenedConnectivity,markers} ]
+
+	ele = MapThread[ processElements[#1,#2,#3]&, {types,flattenedConnectivity,markers} ];
+
+	If[ Union[markers] === {0},
+		elSetPos = getPosition[list,"*ELSET"];
+		solidSectionPos = getPosition[list, "*SOLIDSECTION"];
+
+		If[ (Length[solidSectionPos] > 0) && (Length[ elSetPos] > 0),
+			markerLookUp = getMarkerLookup[list, solidSectionPos];
+			elSetMarker = getElementMarkers[list, #, markerLookUp]& /@ elSetPos;
+			elSetMarker = DeleteCases[ elSetMarker , {{}, 0}];
+			numEle = Total[Length[ElementIncidents[#]]&/@ele];
+			markers = ConstantArray[0, {numEle}];
+			(markers[[#[[1]]]] = #[[2]])& /@ elSetMarker;
+			markers = Internal`PartitionRagged[ markers,
+				Length /@ ElementMarkers[ele]];
+			ele = MapThread[#1[#2,#3]&,
+				{Head /@ ele, ElementIncidents[ele], markers}];
+		];
+
+	];	
+
+	ele
 ];
 
 
