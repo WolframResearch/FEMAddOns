@@ -10,6 +10,11 @@ ClearAll[StructuredMesh];
 StructuredMesh::usage="StructuredMesh[raster,{nx,ny}] creates structured mesh of quadrilaterals.
 StructuredMesh[raster,{nx,ny,nz}] creates structured mesh of hexahedra.";
 
+ClearAll[ExtrudeMesh];
+ExtrudeMesh::usage="ExtrudeMesh[mesh, thickness, layers] extrudes a 2D quadrilateral mesh to a 3D hexahedron mesh.";
+ExtrudeMesh::order="Only first order meshes are supported. The mesh is converted to first order, the extrusion is made and then converted back to higher order.";
+ExtrudeMesh::eltype="Only meshes with QuadElement(s) is supported.";
+
 ClearAll[ToQuadMesh]
 ToQuadMesh::usage="ToQuadMesh[mesh] converts triangular mesh to quadrilateral mesh.";
 
@@ -319,6 +324,62 @@ Module[
 		"MeshElements" -> unitMesh["MeshElements"]
 	]
 ];
+
+
+
+(* taken from Pintar's https://github.com/c3m-labs/MeshTools *)
+ExtrudeMesh//SyntaxInformation={"ArgumentsPattern"->{_,_,_}};
+
+ExtrudeMesh[meshIn_ElementMesh,thickness_?Positive,layers_Integer?Positive]:=
+Module[
+	{n,nodes2D,nodes3D,elements2D,elements3D,markers2D,markers3D,mesh=meshIn,
+	changeOrderQ = False, meshElements},
+	
+	If[
+		meshIn["MeshOrder"]=!=1,
+		Message[ExtrudeMesh::order];
+		changeOrderQ = True;
+		mesh = MeshOrderAlteration[meshIn, 1];
+	];
+
+	(* Mesh "EmbeddingDimension" is already checked with correct "MeshElements" type. *)
+	meshElements = mesh["MeshElements"];
+	meshElements = MeshElementMerge[meshElements];
+	If[
+		(Head /@ meshElements)=!={QuadElement},
+		Message[ExtrudeMesh::eltype];Return[$Failed,Module]
+	];
+		
+	nodes2D=mesh["Coordinates"];
+	elements2D=First@ElementIncidents[meshElements];
+	markers2D=First@ElementMarkers[meshElements];
+	n=Length[nodes2D];
+	
+	nodes3D=Join@@Map[
+		(Transpose@Join[Transpose[nodes2D],{ConstantArray[#,n]}])&,
+		Subdivide[0.,thickness,layers]
+	];
+
+	elements3D=Join@@Table[
+		Map[Join[n*(i-1)+#,n*i+#]&,elements2D],
+		{i,layers}
+	];
+
+	markers3D=Flatten@ConstantArray[markers2D,layers];
+	
+	newMesh = ToElementMesh[
+		"Coordinates"->nodes3D,
+		"MeshElements"->{HexahedronElement[elements3D,markers3D]},
+		"RegionHoles"->None
+	];
+
+	If[ changeOrderQ,
+		newMesh = MeshOrderAlteration[newMesh, meshIn["MeshOrder"]];
+	];
+
+	newMesh
+];
+
 
 
 (*
