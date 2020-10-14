@@ -219,12 +219,14 @@ convertToElementMesh[nodesIn_,allElements_]:=Module[
 
 	(* Spatial dimensions of the problem. *)
 	sDim=Last@Dimensions[nodes];
+
+	If[ !(sDim === 3 || sDim === 2 || sDim === 1), Return[ $Failed, Module]];
 	
 	point=Cases[allElements,PointElement[__],2];
 	line=Cases[allElements,LineElement[__],2];
 	surface=Cases[allElements,TriangleElement[__]|QuadElement[__],2];
 	solid=Cases[allElements,TetrahedronElement[__]|HexahedronElement[__],2];
-	
+
 	(* If number of dimensions is 3 but no solid elements are specified, 
 	then we use ToBoundaryMesh to create ElementMesh. And similarly for 2 dimensions. *)
 	If[
@@ -559,8 +561,8 @@ getPosition[list_List,key_]:=ToExpression@Flatten@Position[list,key];
 
 getNodes[list_]:=Module[
 	{noNodes,start,listOfStrings},
-	noNodes=getNumber[list," # number of mesh points"];
-	start=getPosition[list,"# Mesh point coordinates"];
+	noNodes=getNumber[list," # number of mesh points"|" # number of mesh vertices"];
+	start=getPosition[list,"# Mesh point coordinates"|"# Mesh vertex coordinates"];
 	listOfStrings=Join@@MapThread[
 		Take[list,{#1+1,#1+#2}]&,
 		{start,noNodes}
@@ -595,10 +597,17 @@ modification[type_,nodes_]:=nodes;
 getElements[list_,type_,length_,startElement_,startDomain_]:=With[
 	{head=type/.switchType},
 	{
-	head[
-		(* +1 because node counting starts from 0 *)
-		(modification[type,#]&/@takeLines[list,startElement,length])+1,
-		Flatten@takeLines[list,startDomain,length]
+	If[ startDomain === 0,
+		head[
+			(* +1 because node counting starts from 0 *)
+			(modification[type,#]&/@takeLines[list,startElement,length])+1
+		]
+	,
+		head[
+			(* +1 because node counting starts from 0 *)
+			(modification[type,#]&/@takeLines[list,startElement,length])+1,
+			Flatten@takeLines[list,startDomain,length]
+		]
 	]
 	}
 ];
@@ -632,10 +641,10 @@ importComsolMesh[list:{__String}, opts:OptionsPattern[]]:=Module[
 	(* I think both "Domains"  and "Geometric entity indices" can be considered as markers. *)
 	startMarkers=getPosition[list,"# Domains"|"# Geometric entity indices"];
 	If[ret==="MeshMarkers", Return[startMarkers]];
+	If[startMarkers === {}, startMarkers = ConstantArray[0, {Length[types]}]];
 	
 	nodes=getNodes[list];
 	If[ret==="MeshNodes", Return[nodes]];
-	
 	
 	allElements=MapThread[
 		getElements[list,#1,#2,#3,#4]&,
