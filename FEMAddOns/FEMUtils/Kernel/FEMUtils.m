@@ -620,7 +620,7 @@ MakeBoundaryElementMeshBooleanOperation[RegionIntersection,
 
 BoundaryElementMeshJoin[bm1_, bm2_, opts:OptionsPattern[ToBoundaryMesh]] /; validInputQ[bm1, bm2] :=
 Module[
-	{c1, c2, nc1, newBCEle, newPEle, eleTypes, markers},
+	{c1, c2, nc1, newBCEle, newPEle, eleTypes, markers, bmesh, inci, temp},
 
 	c1 = bm1["Coordinates"];
 	c2 = bm2["Coordinates"];
@@ -647,12 +647,26 @@ Module[
 		{eleTypes, ElementIncidents[newPEle] + nc1, markers}];
 
 
-	ToBoundaryMesh[
+	bmesh = ToBoundaryMesh[
 		"Coordinates" -> Join[c1, c2], 
 		"BoundaryElements" -> Flatten[{bm1["BoundaryElements"], newBCEle}],
 		"PointElements" -> Flatten[{bm1["PointElements"], newPEle}],
 		opts
-	]
+	];
+
+	inci = Join @@ ElementIncidents[bmesh["BoundaryElements"]];
+	If[ !DuplicateFreeQ[Sort /@ inci],
+		temp = MeshRegion[
+			bmesh["Coordinates"], bmesh["BoundaryElements"] /.  {
+				TriangleElement -> Triangle,
+				QuadElement -> Polygon,
+				LineElement -> Line}]["MakeRepresentation"["ElementMesh"]];
+		If[ BoundaryElementMeshQ[ temp],
+			bmesh = temp;
+		];
+	];
+
+	bmesh
 ]
 
 (*BoundaryElementMeshJoin[bm1_,bmRest__]/;validInputQ[bm1,bmRest[[1]]]\
