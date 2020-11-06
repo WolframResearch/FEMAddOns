@@ -656,11 +656,12 @@ Module[
 
 	inci = Join @@ ElementIncidents[bmesh["BoundaryElements"]];
 	If[ !DuplicateFreeQ[Sort /@ inci],
+		(* This will lose markers *)
 		temp = MeshRegion[
 			bmesh["Coordinates"], bmesh["BoundaryElements"] /.  {
-				TriangleElement -> Triangle,
-				QuadElement -> Polygon,
-				LineElement -> Line}]["MakeRepresentation"["ElementMesh"]];
+				TriangleElement[i_, m___] :> Triangle[i],
+				QuadElement[i_, m___] :> Polygon[i],
+				LineElement[i_, m___] :> Line[i]}]["MakeRepresentation"["ElementMesh"]];
 		If[ BoundaryElementMeshQ[ temp],
 			bmesh = temp;
 		];
