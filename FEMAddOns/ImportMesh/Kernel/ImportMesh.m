@@ -30,6 +30,8 @@ If[
 (* Mathematica FEM functionality (context "NDSolve`FEM`") is needed. *)
 BeginPackage["ImportMesh`",{"NDSolve`FEM`"}];
 
+ClearAll[ImportMesh];
+
 
 (* ::Subsection:: *)
 (*Messages*)
@@ -74,7 +76,6 @@ EndPackage[];
 
 (* Begin private context *)
 Begin["`Private`"];
-
 
 (* 
 Implementation for each mesh file format has its own private subcontext (e.g. ImportMesh`Private`Gmsh`).
@@ -161,7 +162,7 @@ ImportMesh[file:_String|_File, opts:OptionsPattern[]]/;(
 						]
 					];
 			If[res===$Failed, Message[ImportMesh::fail, file]];
-			res/;MatchQ[res, _NDSolve`FEM`ElementMesh|$Failed]
+			res
 		];
 
 
@@ -487,7 +488,7 @@ $importMeshFormats["inp", "Elements"]=
 
 importAbaqusMesh[list_List, ops:OptionsPattern[]]:=Module[
 	{nodes,numbering,allElements,dim, ret=OptionValue["ReturnElement"]},
-	
+
 	(* Currently incremental node and element generation is not supported.*)
 	If[getPosition[list,"*NGEN"|"*ELGEN"]=!={},Message[ImportMesh::abaqus];Throw[$Failed]];
 	
