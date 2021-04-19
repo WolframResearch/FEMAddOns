@@ -26,9 +26,15 @@ If[
 	Print["Package requires Mathematica 11 or higher."];Abort[]
 ];
 
-
 (* Mathematica FEM functionality (context "NDSolve`FEM`") is needed. *)
 BeginPackage["ImportMesh`",{"NDSolve`FEM`"}];
+
+If[
+	$VersionNumber <= 12.2,
+	stringToDouble = Internal`StringToDouble
+,
+	stringToDouble = Internal`StringToMReal
+];
 
 ClearAll[ImportMesh];
 
@@ -382,7 +388,7 @@ getNodes[list_]:=Module[
 	allNodeData=Join@@(takeLines[list,#]&/@startLines);
 	numbering=ToExpression[allNodeData[[All,1]]];
 	crds=Map[
-		Internal`StringToDouble,
+		stringToDouble,
 		allNodeData[[All,2;;]],
 		{2}
 	];
@@ -569,7 +575,7 @@ getNodes[list_]:=Module[
 		{start,noNodes}
 	];
 	Map[
-		Internal`StringToDouble,
+		stringToDouble,
 		StringSplit@listOfStrings,
 		{2}
 	]
@@ -689,7 +695,7 @@ getNodes[list_]:=Module[
 	start=getStartPosition[list,"$Nodes"];
 	noNodes=ToExpression@Part[list,start+1];
 	Map[
-		Internal`StringToDouble,
+		stringToDouble,
 		Rest/@StringSplit@Take[list,{start+2,start+1+noNodes}],
 		{2}
 	]
@@ -815,7 +821,7 @@ getNodes[list_]:=Module[
 	n=ToExpression@list[[start+2]];
 	
 	Partition[
-		Internal`StringToDouble/@list[[start+3;;start+3+(n*dim)-1]],
+		stringToDouble/@list[[start+3;;start+3+(n*dim)-1]],
 		dim
 	]
 ];
