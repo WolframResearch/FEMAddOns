@@ -52,8 +52,9 @@ myDelaunay[pts_] :=
       ]
     ];
 
+(* this should be called lessThenZeroPosition *)
 greaterEqualZeroPosition[th_] :=
-    Flatten[SparseArray[UnitStep[th], Automatic, 1]["NonzeroPositions"]];
+    Flatten[SparseArray[1 - UnitStep[th]]["NonzeroPositions"]];
 
 mkCompileCode[vars_, code_, idx_] :=
     With[{fVars = Flatten[vars]},
