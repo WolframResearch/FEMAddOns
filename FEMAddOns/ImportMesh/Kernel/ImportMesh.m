@@ -593,6 +593,7 @@ switchType={
 };
 
 
+modification["tri2",nodes_]:=nodes[[{1,2,3,4,6,5}]];
 modification["quad",nodes_]:=nodes[[{1,2,4,3}]];
 modification["quad2",nodes_]:=nodes[[{1,2,4,3,5,8,9,6}]];
 modification["hex",nodes_]:=nodes[[{1,2,4,3,5,6,8,7}]];
