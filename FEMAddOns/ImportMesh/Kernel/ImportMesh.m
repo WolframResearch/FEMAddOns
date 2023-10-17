@@ -54,6 +54,7 @@ ImportMesh::eltype="Element type `1` is not supported.";
 ImportMesh::abaqus="Incremental node or element generation (*NGEN and *ELGEN keywords) is not supported.";
 ImportMesh::fail="Failed to extract mesh from ``";
 ImportMesh::gmshfrmt="GMSH file format version `1` is not supported.";
+ImportMesh::gmshbin="The file is a binary GMSH file. The binary file format is not supported. Try to generate an ASCII file format.";
 
 
 (* ::Subsection:: *)
@@ -762,11 +763,21 @@ importGmshMesh//Options=Options[ImportMesh];
 
 importGmshMesh[list_List, opts:OptionsPattern[]]:=Module[
 	{version,nodes,markers,allElements,ret},
-	
-	version=First@StringSplit@Part[list,getStartPosition[list,"$MeshFormat"]+1];
+
+	startPos = getStartPosition[list,"$MeshFormat"]+1;
+	prolog = StringSplit@Part[list,startPos];
+
+	version=First[prolog];
 	If[
 		Not@MemberQ[{"2.2"},version],
 		Message[ImportMesh::gmshfrmt,version];Return[$Failed]
+	];
+
+	If[ Length[prolog] > 1,
+		binaryQ = prolog[[2]] === "1";
+		If[ binaryQ,
+			Message[ImportMesh::gmshbin];Return[$Failed]
+		];
 	];
 	
 	ret=OptionValue["ReturnElement"];
