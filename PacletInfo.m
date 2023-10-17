@@ -2,7 +2,7 @@
 
 Paclet[
     Name -> "FEMAddOns",
-    Version -> "1.4.7",
+    Version -> "1.4.8",
     MathematicaVersion -> "11+",
     Description -> "Package provides additional finite element method functionality.",
     Extensions -> 
