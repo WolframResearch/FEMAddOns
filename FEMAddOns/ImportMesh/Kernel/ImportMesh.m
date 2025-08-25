@@ -233,7 +233,7 @@ convertToElementMesh[nodesIn_,allElements_]:=Module[
 	point=Cases[allElements,PointElement[__],2];
 	line=Cases[allElements,LineElement[__],2];
 	surface=Cases[allElements,TriangleElement[__]|QuadElement[__],2];
-	solid=Cases[allElements,TetrahedronElement[__]|HexahedronElement[__],2];
+	solid=Cases[allElements,TetrahedronElement[__]|PrismElement[__]|HexahedronElement[__],2];
 
 	(* If number of dimensions is 3 but no solid elements are specified, 
 	then we use ToBoundaryMesh to create ElementMesh. And similarly for 2 dimensions. *)
@@ -311,6 +311,8 @@ processSurface[type_,string_]:=Which[
 processVolume[type_,string_]:=Which[
 	StringStartsQ[string,"4"],{TetrahedronElement,4},
 	StringStartsQ[string,"10"],{TetrahedronElement,10},
+	StringStartsQ[string,"6"],{PrismElement,6},
+	StringStartsQ[string,"15"],{PrismElement,15},
 	StringStartsQ[string,"8"],{HexahedronElement,8},
 	StringStartsQ[string,"20"],{HexahedronElement,20},
 	True,Message[ImportMesh::eltype,type];Throw[$Failed]
